@@ -76,3 +76,35 @@ def test_set_progress_callbacks(client):
     assert client.upload_progress_callback is upload_cb
     assert client.download_progress_callback is download_cb
 
+def test_sync_request(monkeypatch, client):
+    # Patch the _request_sync method to return a fake response
+    fake_response = HTTPResponse(
+        status=200,
+        headers={"Content-Type": "application/json"},
+        data={"ok": True},
+        elapsed=0.1,
+        url="https://api.example.com/test"
+    )
+    monkeypatch.setattr(client, "_request_sync", lambda *a, **k: fake_response)
+    resp = client.request("GET", "/test", sync=True)
+    assert isinstance(resp, HTTPResponse)
+    assert resp.status == 200
+    assert resp.ok
+    assert resp.is_json
+    assert resp.json() == {"ok": True}
+
+def test_get_post_patch_delete_methods(monkeypatch, client):
+    fake_response = HTTPResponse(
+        status=201,
+        headers={},
+        data="created",
+        elapsed=0.05,
+        url="https://api.example.com/resource"
+    )
+    monkeypatch.setattr(client, "_request_sync", lambda *a, **k: fake_response)
+    assert client.get("/resource", sync=True).status == 201
+    assert client.post("/resource", sync=True).status == 201
+    assert client.patch("/resource", sync=True).status == 201
+    assert client.delete("/resource", sync=True).status == 201
+    assert client.put("/resource", sync=True).status == 201
+

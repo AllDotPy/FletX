@@ -55,4 +55,24 @@ def test_httpclient_custom_initialization():
     assert client.default_cookies == cookies
     assert client.sync_mode is True
 
+def test_add_middleware(client):
+    middleware = Mock()
+    client.add_middleware(middleware)
+    assert middleware in client.middlewares
+
+def test_set_auth(client):
+    client.set_auth("token123", auth_type="Bearer")
+    assert any(m.__class__.__name__ == "AuthMiddleware" for m in client.middlewares)
+
+def test_set_rate_limit(client):
+    client.set_rate_limit(5.0)
+    assert client.rate_limit_per_second == 5.0
+
+def test_set_progress_callbacks(client):
+    upload_cb = Mock()
+    download_cb = Mock()
+    client.set_upload_progress_callback(upload_cb)
+    client.set_download_progress_callback(download_cb)
+    assert client.upload_progress_callback is upload_cb
+    assert client.download_progress_callback is download_cb
 

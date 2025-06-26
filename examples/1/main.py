@@ -3,24 +3,15 @@ import flet as ft
 from fletx.app import FletXApp
 from routes import MyAppRouter
 
-def main():#(page: ft.Page):
-    # Configuration de la page
-    # page.title = "Mon App FletX"
+def main():
 
-    # # Setting up theme
-    # page.theme = ft.Theme(
-    #     color_scheme_seed = ft.Colors.GREEN
-    # )
-    # page.dark_theme = ft.Theme(
-    #     color_scheme_seed = ft.Colors.BLUE_800,
-    #     scaffold_bgcolor = ft.Colors.BLACK,
-    #     font_family = 'Bebas Neue, sans-serif',
-    # )
-    # page.theme_mode = ft.ThemeMode.DARK
-
-    # # Setting up window size
-    # page.window.height = 810
-    # page.window.width = 400
+    # Lifecycle Hooks 
+    async def on_startup(page: ft.Page):
+        print("App is running!")
+        page.padding = 0
+    
+    def on_shutdown(page: ft.Page):
+        print("App is closed!")
     
     # Initialisation de l'application FletX
     app = FletXApp(
@@ -34,7 +25,9 @@ def main():#(page: ft.Page):
             color_scheme_seed = ft.Colors.BLUE_800,
             scaffold_bgcolor = ft.Colors.BLACK,
             font_family = 'Bebas Neue, sans-serif',
-        )
+        ),
+        on_startup = on_startup,
+        on_shutdown = on_shutdown,
     ).with_window_size(400,810)
     
     # Cette méthode initialise le router avec la page Flet

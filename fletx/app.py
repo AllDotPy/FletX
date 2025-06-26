@@ -4,6 +4,7 @@ FletX main entry point
 
 import asyncio
 import inspect
+import sys, signal, atexit
 import flet as ft
 from typing import (
     Dict, Type, Optional, Callable, Any, Union, List
@@ -33,6 +34,7 @@ class FletXApp:
         window_config: Optional[Dict[str, Any]] = None,
         on_startup: Optional[Union[Callable, List[Callable]]] = None,
         on_shutdown: Optional[Union[Callable, List[Callable]]] = None,
+        on_system_exit: Optional[Union[Callable, List[Callable]]] = None,
         **kwargs
     ):
         """
@@ -63,10 +65,11 @@ class FletXApp:
         # Normalize hooks to lists
         self.on_startup = self._normalize_hooks(on_startup)
         self.on_shutdown = self._normalize_hooks(on_shutdown)
+        self.on_system_exit = self._normalize_hooks(on_system_exit)
 
         # Internal state
         self._is_initialized = False
-        self._page = None
+        self._page: ft.Page = None
 
         # Initialize event loop manager
         self._loop_manager = EventLoopManager()
@@ -121,6 +124,23 @@ class FletXApp:
 
         self.on_shutdown.append(hook)
         return self
+    
+    def attach_on_shutdown_hooks(self):
+        """Add on Shutdown hooks to the page close event."""
+
+        self.page.on_close = lambda: self._loop_manager.run_until_complete(
+            self._execute_hooks(self.on_shutdown, "shutdown")
+        )
+        atexit.register(self.handle_sysem_exit_signal)
+
+    def handle_sysem_exit_signal(self):
+        """handle system exit signals and call handlers"""
+
+        # Just execute on_system_exit_hooks
+        self._execute_hooks(
+            self.on_system_exit,
+            'on_system_exit'
+        )
     
     def configure_window(self, **config):
         """Configure window properties"""
@@ -227,15 +247,16 @@ class FletXApp:
             self._loop_manager.run_until_complete(
                 self._async_main(page)
             )
+            self.attach_on_shutdown_hooks()
         except Exception as e:
-            print(e)
-            raise e
-        finally:
+            self.logger.error(f'Error when trying to run App: {e}')
+
+        # finally:
             # Execute shutdown hooks
-            if self.on_shutdown:
-                self._loop_manager.run_until_complete(
-                    self._execute_hooks(self.on_shutdown, "shutdown")
-                )
+            # if self.on_shutdown:
+            #     self._loop_manager.run_until_complete(
+            #         self._execute_hooks(self.on_shutdown, "shutdown")
+            #     )
             # self._loop_manager.close_loop()
 
     def _main(self, page: ft.Page):
@@ -266,13 +287,14 @@ class FletXApp:
 
             try:
                 self._loop_manager.run_until_complete(self._async_main(page))
+                self.attach_on_shutdown_hooks()
             except Exception as e:
-                print(e)
-            finally:
-                if self.on_shutdown:
-                    self._loop_manager.run_until_complete(
-                        self._execute_hooks(self.on_shutdown, "shutdown")
-                    )
+                self.logger.error(f'Error when trying to run App: {e}')
+            # finally:
+            #     if self.on_shutdown:
+            #         self._loop_manager.run_until_complete(
+            #             self._execute_hooks(self.on_shutdown, "shutdown")
+            #         )
                 # self._loop_manager.close_loop()
         
         merged_kwargs = {**self.flet_kwargs, **kwargs}

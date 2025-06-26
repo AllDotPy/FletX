@@ -11,6 +11,7 @@ dependencies = [
     "flet[all]>=0.28.3",
     "httpx>=0.28.1",
     "pydantic>=2.11.5",
+    "pytest>=8.4.0",
     "setuptools>=80.8.0",
     "uvloop>=0.21.0",
 ]

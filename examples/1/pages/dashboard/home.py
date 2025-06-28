@@ -11,10 +11,13 @@ from ..shared.components import (
 class DashboardHomePage(FletXPage):
     def __init__(self):
         self.controller = FletX.find(DashboardController) or DashboardController()
-        super().__init__()
+        super().__init__(
+            enable_keyboard_shortcuts = True
+        )
 
     def _safe_refresh(self):
         """safe refresh"""
+        print('refreshing..........................')
         if not hasattr(self, '_refreshing'):
             self._refreshing = True
             self.controller.load_data()
@@ -23,7 +26,10 @@ class DashboardHomePage(FletXPage):
     def on_init(self):
         # Charge les données quand la page est montée
         self.controller.load_data()
-        # self.add_keyboard_shortcut("ctrl+r", lambda: print('ctrl+r'), "Refresh page")
+        self.add_keyboard_shortcut("ctrl+r", lambda: print('ctrl+r................activated\n'), "Refresh page")
+        self.add_keyboard_shortcut("ctrl+d", lambda: print('ctrl+d................activated\n'), "Refresh page")
+        # self._setup_built_in_handlers()
+        # self.page.on_keyboard_event = lambda e: print('Key pressed:',e)
         
     def build(self):
         # Initialisation sécurisée

@@ -144,7 +144,7 @@ class FletXPage(ft.Container, ABC):
     def page_instance(self) -> Optional[ft.Page]:
         """Get the Flet page instance"""
 
-        return DI.find(ft.Page)
+        return get_page()
     
     @property
     def average_render_time(self) -> float:
@@ -366,11 +366,6 @@ class FletXPage(ft.Container, ABC):
 
         self._add_event_handler("keyboard", callback)
     
-    def on_route_change(self, callback: Callable[[str], None]):
-        """Listen to route changes"""
-
-        self._add_event_handler("route_change", callback)
-    
     def on_error(self, callback: Callable[[Exception], None]):
         """Listen to error events"""
 
@@ -405,12 +400,20 @@ class FletXPage(ft.Container, ABC):
                 'callback': callback,
                 'description': description
             }
+            self.logger.debug(
+                f'{key_combination} shortcut callback registered for {self.__class__.__name__}'
+            )
+            # Finally re-setup handlers
+            self._setup_built_in_handlers()
     
     def remove_keyboard_shortcut(
         self, key_combination: str
     ) -> bool:
         """Remove a keyboard shortcut"""
 
+        self.logger.debug(
+                f'{key_combination} shortcut handler removed.'
+            )
         return self._keyboard_shortcuts.pop(key_combination, None) is not None
     
     def get_keyboard_shortcuts(self) -> Dict[str, Dict]:
@@ -602,7 +605,7 @@ class FletXPage(ft.Container, ABC):
         """Connect an event handler to Flet events"""
 
         page = self.page_instance
-        if page and hasattr(page, f'on_{event_name}'):
+        if page and hasattr(page, f'on_{event_name}_event'):
             def safe_handler(*args, **kwargs):
                 if self.is_mounted:
                     try:
@@ -611,8 +614,8 @@ class FletXPage(ft.Container, ABC):
                         self.logger.error(f"Error in {event_name} handler: {e}")
                         self._trigger_error_handlers(e)
             
-            setattr(page, f'on_{event_name}', safe_handler)
-            return lambda: setattr(page, f'on_{event_name}', None)
+            setattr(page, f'on_{event_name}_event', safe_handler)
+            return lambda: setattr(page, f'on_{event_name}_event', None)
         return None
     
     def _trigger_error_handlers(self, error: Exception):

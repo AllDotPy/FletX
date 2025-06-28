@@ -74,7 +74,7 @@ class EffectManager:
 class Effect:
     """
     Represents an individual effect
-    Represents a single effect that can be executed, 
+    A single effect that can be executed, 
     with its own dependencies, execution function, 
     and identification key, allowing to manage effects 
     in a precise and isolated way.

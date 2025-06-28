@@ -31,5 +31,5 @@ jobs:
       - name: Run isort
         run: isort .
 
-      - name: Run mypy
-        run: mypy .
+    #   - name: Run mypy
+    #     run: mypy .

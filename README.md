@@ -125,6 +125,21 @@ fletx run --web # Will open app in a navigator
         # --help for more option
 ```
 
+## Running Tests with FletX CLI
+
+**The `fletx test` command allows you to run tests for your FletX project using `pytest`.**
+
+### Usage
+
+```bash
+fletx test                      # Run all tests
+fletx test ./tests/test_api.py  # Run a specific test file
+fletx test -k "MyTestClass"     # Run tests matching a keyword
+fletx test -v                   # Verbose output
+fletx test --coverage           # Run tests with coverage report
+fletx test --pdb                # Debug on test failure
+```
+
 ---
 
 

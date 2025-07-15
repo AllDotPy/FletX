@@ -23,6 +23,8 @@ fletx <command> [options]
 | **Project Management** | `new`      | Create a new FletX project from template             |
 | **Code Generation**    | `generate` | Generate components like controllers, services, etc. |
 | **Utilities**          | `run`      | Run a FletX project with various options             |
+| **Testing**            | `test`     | Run tests for your FletX project                     |
+
 
 👉 **Specific help :**
 
@@ -119,6 +121,27 @@ fletx generate controller MyController --with-test
 
 # Run the project
 fletx run --web --debug
+```
+
+---
+
+## `fletx test`
+
+Run tests for your FletX project.
+
+```bash
+fletx test [options]
+```
+
+### Examples
+
+```bash
+fletx test                      # Run all tests
+fletx test ./tests/test_api.py  # Run a specific test file
+fletx test -k "MyTestClass"     # Run tests matching a keyword
+fletx test -v                   # Verbose output
+fletx test --coverage           # Run tests with coverage report
+fletx test --pdb                # Debug on test failure
 ```
 
 ---

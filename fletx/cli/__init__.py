@@ -17,7 +17,7 @@ from fletx.utils import (
 )
 from fletx.cli.commands import (
     CommandRegistry, CommandParser,
-    BaseCommand, CommandRegistry, 
+    BaseCommand, CommandRegistry, TestCommand
 )
 
 # Add the current directory to the Python path to allow imports

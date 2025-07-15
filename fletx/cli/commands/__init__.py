@@ -12,6 +12,10 @@ from fletx.cli.commands.generate import (
     ComponentCommand
 )
 
+from fletx.cli.commands.testproject import (
+    TestCommand
+
+)
 
 __all__ = [
     'CommandRegistry',
@@ -19,5 +23,6 @@ __all__ = [
     'BaseCommand',
     'TemplateCommand',
     'NewProjectCommand',
-    'RunCommand'
+    'RunCommand',
+    'TestCommand'
 ]

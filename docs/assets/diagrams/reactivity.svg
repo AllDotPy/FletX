@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="200" viewBox="0 0 760 200">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="10" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,3 L0,6 Z" fill="#4F46E5" />
+    </marker>
+    <style>
+      .box{fill:#ffffff;stroke:#1f2937;stroke-width:2;rx:8;ry:8}
+      .label{font-family:Inter,Arial,sans-serif;font-size:14px;fill:#111827}
+      .title{font-family:Inter,Arial,sans-serif;font-size:16px;font-weight:700;fill:#111827}
+    </style>
+  </defs>
+  <rect x="20" y="30" width="190" height="60" class="box"/>
+  <text x="115" y="55" text-anchor="middle" class="title">Widget event</text>
+  <text x="115" y="75" text-anchor="middle" class="label">e.g., on_click()</text>
+
+  <rect x="280" y="30" width="200" height="60" class="box"/>
+  <text x="380" y="55" text-anchor="middle" class="title">Controller method</text>
+  <text x="380" y="75" text-anchor="middle" class="label">updates Rx value</text>
+
+  <rect x="540" y="30" width="200" height="60" class="box"/>
+  <text x="640" y="55" text-anchor="middle" class="title">Reactive state (Rx*)</text>
+  <text x="640" y="75" text-anchor="middle" class="label">change detected</text>
+
+  <rect x="280" y="120" width="200" height="60" class="box"/>
+  <text x="380" y="145" text-anchor="middle" class="title">Widgets re-render</text>
+  <text x="380" y="165" text-anchor="middle" class="label">bound via lambda/decorators</text>
+
+  <line x1="210" y1="60" x2="280" y2="60" stroke="#4F46E5" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="480" y1="60" x2="540" y2="60" stroke="#4F46E5" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="640" y1="90" x2="640" y2="120" stroke="#4F46E5" stroke-width="3" marker-end="url(#arrow)"/>
+</svg>
+

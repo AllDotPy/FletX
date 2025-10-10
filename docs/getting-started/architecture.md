@@ -1,111 +1,73 @@
-# 🏗️ FletX Architecture
+# 🏗️ FletX Architecture (Progressive Guide)
 
-FletX is built on a **modular and reactive architecture** designed to help developers structure Flet applications in a clean, maintainable, and scalable way. It is inspired by principles like separation of concerns and dependency injection.
+FletX is a **modular, reactive application layer** for [Flet](https://flet.dev). Think of it as the scaffolding that helps your UI, logic, and navigation work together cleanly.
 
----
-
-## 📚 Overview
-
-FletX architecture revolves around three **core components**:
-
-1. **Pages (`FletXPage`)** – declarative, reactive UI components.
-2. **Controllers (`FletXController`)** – business logic and state management.
-3. **Services (optional)** – reusable utilities for API calls, database access, etc.
+This guide builds up from the big picture to the details, with diagrams and tiny examples you can copy and adapt.
 
 ---
 
-### 🔄 Typical Flow
+## 🗺️ Big Picture
 
-A typical user interaction flows like this:
+Analogy: FletX is like a theater production.
 
-```plaintext
-User Action → Controller Logic → State Update → UI Re-render
+- The **Page** is the stage where the scene is rendered.
+- The **Controller** is the director that decides what happens next.
+- **Reactive state (Rx)** is the script prompts: when a line changes, actors (widgets) immediately react.
+- **Services** are backstage crews (API, storage, utilities).
+- The **Router** is the stage manager who swaps scenes.
+
+High-level flow:
+
+```text
+User action → Controller updates reactive state → Widgets re-render
 ```
 
-When routing/navigation happens, it flows like this:
+<figure>
+  <img src="../assets/diagrams/reactivity.svg" alt="Sequence showing widget event triggering controller method, which updates an Rx value, causing dependent widgets to re-render." />
+  <figcaption><strong>Reactivity flow</strong>: events update reactive state; bound widgets re-render automatically.</figcaption>
+</figure>
 
-```plaintext
-Routing → Page Instantiation → Controller Injection → Build UI
+Navigation flow:
+
+```text
+Route change → Page created → Controller available → build() renders UI
 ```
+
+<figure>
+  <img src="../assets/diagrams/routing.svg" alt="Route change matched by router, page creation, controller attachment, then build to render UI." />
+  <figcaption><strong>Routing flow</strong>: router matches URL, creates the page, attaches its controller, then renders.</figcaption>
+</figure>
+
+!!! tip "How to read these diagrams"
+
+    - Boxes represent **components** (Page, Controller, Service, etc.).
+    - Arrows indicate **direction of flow** (events → state → UI).
+    - Bold labels are the **key step** in each stage.
+    - White diagram backgrounds ensure legibility in **dark mode**; use the ASCII diagrams alongside if you prefer text.
 
 ---
 
-## 🧱 Core Building Blocks
+## 🧱 Core Pieces (at a glance)
 
-### 1. FletXPage
+- Page (`FletXPage`): builds UI in `build()` and accesses its controller via `self.ctrl`.
+- Controller (`FletXController`): holds logic and reactive state (e.g., `RxInt`, `RxStr`).
+- Services (optional): reusable dependencies resolved via DI (dependency injection).
+- Router (`router_config`): maps paths to pages; supports dynamic params and guards.
 
-A **FletXPage** is a class that represents a visual page (screen) in your app. It inherits from `FletXPage` and defines a `build()` method that returns a reactive Flet UI.
+Simple data flow:
 
-#### Example:
-
-```python
-class HomePage(FletXPage):
-    ctrl = HomeController()
-
-    def build(self):
-        return ft.Column([
-            ft.Text(lambda: str(self.ctrl.counter()), size=40),
-            ft.ElevatedButton("Increment", on_click=lambda e: self.ctrl.counter.increment())
-        ])
-```
-
----
-
-### 2. FletXController
-
-A **FletXController** handles **business logic**, manages **reactive state**, and is tied to a specific page. It uses observable values to trigger UI updates automatically.
-
-#### Example:
-
-```python
-class HomeController(FletXController):
-    def __init__(self):
-        self.counter = RxInt(0)
-        super().__init__()
-```
-
-`RxInt` is a reactive object provided by FletX. Updating it automatically refreshes all widgets that depend on it.
-
----
-
-## 🔗 Navigation & Routing
-
-FletX provides a centralized router configuration (`router_config`) for managing navigation across your app:
-
-```python
-router_config.add_route("/", HomePage)
-router_config.add_route("/about", AboutPage)
-
-# Or register a list of routes
-router_config.add_routes([
-    {"path": "/", "component": HomePage},
-    {"path": "/settings", "component": SettingsPage}
-])
-```
-
-> You can define dynamic routes like:
-
-```python
-router_config.add_route("/user/:id", UserPage)
-router_config.add_route("/user/*category", CategoryPage)
-```
-
-In your page:
-
-```python
-def build(self):
-    user_id = self.route_info.params["id"]
+```text
+[Widget event] ──▶ [Controller method] ──▶ [Rx value changes] ──▶ [UI auto-updates]
 ```
 
 ---
 
-## 🧠 Reactive State Management
-
-FletX provides **reactive variables**: `RxInt`, `RxStr`, `RxList`, etc., which track their values and trigger UI updates when modified.
-
-#### Example:
+## ✋ First Contact: 30‑second example
 
 ```python
+import flet as ft
+from fletx.core import FletXPage, FletXController, RxInt
+
 class CounterController(FletXController):
     def __init__(self):
         self.count = RxInt(0)
@@ -115,49 +77,176 @@ class CounterPage(FletXPage):
     ctrl = CounterController()
 
     def build(self):
-        return MyReactiveText(rx_text=self.ctrl.count, size=200, weight="bold"),
+        return ft.Column([
+            ft.Text(lambda: f"Count: {self.ctrl.count.value}", size=40),
+            ft.ElevatedButton("+1", on_click=lambda e: self.ctrl.count.increment())
+        ])
 ```
 
-> `lambda:` makes the widget reactive — it will re-render automatically when the value changes.
+What to notice:
+
+- The `Text` uses a `lambda:` so it re-renders when `count` changes.
+- The button calls a controller method that mutates reactive state.
 
 ---
 
-## 🧩 Services (Optional)
+## 🔄 Reactivity (how updates propagate)
 
-**Services** are reusable, testable classes used for accessing APIs, databases, or any shared logic. They can be injected into controllers.
+```text
+       increment()
+           │
+           ▼
+  [RxInt.count]  ── change detected ──▶  widgets depending on it re-render
+```
 
-#### Example:
+Key ideas:
+
+- Use `Rx*` types (`RxInt`, `RxStr`, `RxList`, `RxDict`, …) for observable state.
+- Bind widgets with `lambda:` or reactive decorators so they update automatically.
+- Keep computations inside the controller; keep the page mostly declarative.
+
+Tiny example:
+
+```python
+from fletx.core import FletXController, RxStr
+
+class HelloController(FletXController):
+    def __init__(self):
+        self.name = RxStr("World")
+        super().__init__()
+
+    def set_name(self, value: str):
+        self.name.value = value.strip() or "World"
+```
+
+```python
+import flet as ft
+from fletx.core import FletXPage
+
+class HelloPage(FletXPage):
+    ctrl = HelloController()
+
+    def build(self):
+        return ft.Column([
+            ft.Text(lambda: f"Hello, {self.ctrl.name.value}!"),
+            ft.TextField(on_change=lambda e: self.ctrl.set_name(e.control.value))
+        ])
+```
+
+---
+
+## 🧭 Routing (moving between pages)
+
+Basic setup:
+
+```python
+from fletx.app import FletXApp
+from fletx.navigation import router_config
+
+router_config.add_routes([
+    {"path": "/", "component": HomePage},
+    {"path": "/user/:id", "component": UserPage},
+])
+
+app = FletXApp(title="My App", initial_route="/")
+app.run()
+```
+
+Access dynamic params inside a page:
+
+```python
+class UserPage(FletXPage):
+    ctrl = UserController()
+
+    def build(self):
+        user_id = self.route_info.params["id"]
+        # render with user_id
+```
+
+Diagram:
+
+```text
+URL change → match route → create Page → attach Controller → build() → UI
+```
+
+Learn more: see `Getting Started → Routing System` and `Pages (views)`.
+
+---
+
+## 🧩 Dependency Injection (Services and reuse)
+
+Analogy: DI is a tool bench. Controllers don’t build the tools; they pick them up.
 
 ```python
 class UserService:
-    def fetch_user(self, user_id):
-        return {"id": user_id, "name": "John Doe"}
-```
+    def fetch_user(self, user_id: str) -> dict:
+        return {"id": user_id, "name": "Jane"}
 
-Used in a controller:
-
-```python
 class UserController(FletXController):
     def __init__(self):
+        from fletx.core import FletX
         self.user_service = FletX.find(UserService)
         self.user = RxDict({})
         super().__init__()
 
-    def load_user(self, user_id):
-        self.user.value =  self.user_service.fetch_user(user_id)
+    def load_user(self, user_id: str):
+        self.user.value = self.user_service.fetch_user(user_id)
 ```
+
+DI flow:
+
+```text
+[Controller] ──asks──▶ [DI container] ──returns──▶ [Service instance]
+```
+
+<figure>
+  <img src="../assets/diagrams/di.svg" alt="Controller requests a dependency from the DI container, which returns a service instance used by the controller." />
+  <figcaption><strong>Dependency Injection</strong>: controllers ask the container for services instead of constructing them.</figcaption>
+</figure>
+
+Learn more: see `Getting Started → Dependency Injection` and `Services`.
 
 ---
 
-## 🧪 Minimal Architecture Example
+## 👣 End‑to‑End Mini Walkthrough
 
-Here’s a minimal FletX app putting all the pieces together:
+Goal: Tap a button on `CounterPage` to increment a number.
+
+1) Router maps `/` → `CounterPage`.
+2) `CounterPage` is created with `ctrl = CounterController()`.
+3) UI shows a `Text(lambda: ...)` bound to `ctrl.count`.
+4) Button calls `ctrl.count.increment()`.
+5) `RxInt` notifies dependents → `Text` re-renders with the new value.
+
+---
+
+## 🧰 Common Patterns
+
+- Keep pages thin; put logic in controllers.
+- Use services for I/O and reuse (API, storage, computation helpers).
+- Prefer small, focused controllers per page/feature.
+- Derive view state from a few reactive primitives to avoid duplication.
+- Use route params to load data in `on_init`/first build.
+
+---
+
+## ✅ Best Practices
+
+- Name reactive variables by intent (e.g., `isLoading`, `selectedUserId`).
+- Avoid mutating raw data in pages; call controller methods instead.
+- Keep `build()` pure; it should read state and declare UI, not perform side-effects.
+- Debounce or throttle controller methods that respond to rapid UI events.
+- Centralize navigation in controller methods for testability.
+- Guard your routes when needed (auth, permissions).
+
+---
+
+## 🧪 Minimal App Template
 
 ```python
 # main.py
 from fletx.app import FletXApp
 from fletx.navigation import router_config
-from .pages.counter import CounterPage
 
 router_config.add_route("/", CounterPage)
 
@@ -167,47 +256,38 @@ app.run()
 
 ```python
 # pages/counter.py
-from fletx.core import FletXPage
-from .controllers.counter import CounterController
-from .components.reactive_text import MyReactiveText
 import flet as ft
+from fletx.core import FletXPage, FletXController, RxInt
+
+class CounterController(FletXController):
+    def __init__(self):
+        self.count = RxInt(0)
+        super().__init__()
 
 class CounterPage(FletXPage):
     ctrl = CounterController()
 
     def build(self):
         return ft.Column([
-            MyReactiveText(rx_text=self.ctrl.count, size=40, weight="bold"),
-            ft.ElevatedButton("Increment", on_click=lambda e: self.ctrl.count.increment())
+            ft.Text(lambda: f"{self.ctrl.count.value}", size=40),
+            ft.ElevatedButton("Increment", on_click=lambda e: self.ctrl.count.increment()),
         ])
-```
-
-```python
-# components/reactive_text.py
-import flet as ft
-from fletx.decorators import simple_reactive
-
-@simple_reactive(bindings={'value': 'text'})
-class MyReactiveText(ft.Text):
-
-    def __init__(self, rx_text: RxStr, **kwargs):
-        self.text: RxStr = rx_text
-        super().__init__(**kwargs)
-```
-
-```python
-# controllers/counter.py
-from fletx.core import FletXController, RxInt
-
-class CounterController(FletXController):
-    def __init__(self):
-        self.count = RxInt(0)
-        super().__init__()
 ```
 
 ---
 
-## ✅ Summary Table
+## 🔗 Where to go next
+
+- Getting Started → `Pages (views)`
+- Getting Started → `Controllers`
+- Getting Started → `Routing System`
+- Getting Started → `State Management`
+- Getting Started → `Dependency Injection`
+- Sample project: `Getting Started → Sample Project`
+
+---
+
+## 📚 Reference Cheatsheet
 
 | Component         | Responsibility                           |
 | ----------------- | ---------------------------------------- |
@@ -216,12 +296,3 @@ class CounterController(FletXController):
 | `Rx*` objects     | Reactive state (trigger UI rebuilds)     |
 | `router_config`   | Defines app navigation routes            |
 | Services          | Shared utilities for APIs, storage, etc. |
-
-
----
-
-## 🧠 Next Steps
-
-* Explore [reactive UI binding](ui/reactivity.md)
-* Learn about the [Architecture](architecture.md)
-* Dive into [dependency injection](guides/dependency-injection.md)

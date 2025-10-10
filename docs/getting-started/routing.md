@@ -6,6 +6,14 @@ FletX also provides utility functions for programmatic navigation, such as `navi
 
 ---
 
+!!! tip "How to read routing diagrams"
+
+    - Boxes represent **router steps** or **components**.
+    - Arrows indicate **navigation flow** (URL → match → page → controller → UI).
+    - Prefer using the Architecture guide’s diagrams as a quick mental model.
+
+[← Back to Architecture](architecture.md)
+
 ## 🧭 Basic Routing
 
 Use the global `router_config` to define your app's navigation structure:
@@ -268,5 +276,5 @@ go_back()
 ## 🧠 Next Steps
 
 * Dive into [dependency injection](dependency-injection.md)
-* Explore the [sevices](services.md)
+* Explore the [services](services.md)
 * Learn about the [Architecture](architecture.md)

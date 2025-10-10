@@ -49,7 +49,7 @@ Route change → Page created → Controller available → build() renders UI
 
 ## 🧱 Core Pieces (at a glance)
 
-- Page (`FletXPage`): builds UI in `build()` and accesses its controller via `self.ctrl`.
+- Page (`FletXPage`): builds UI in `build()` and accesses its controller via `self.ctrl` (or any variable name you choose).
 - Controller (`FletXController`): holds logic and reactive state (e.g., `RxInt`, `RxStr`).
 - Services (optional): reusable dependencies resolved via DI (dependency injection).
 - Router (`router_config`): maps paths to pages; supports dynamic params and guards.
@@ -67,6 +67,7 @@ Simple data flow:
 ```python
 import flet as ft
 from fletx.core import FletXPage, FletXController, RxInt
+from fletx.decorators import obx
 
 class CounterController(FletXController):
     def __init__(self):
@@ -74,19 +75,24 @@ class CounterController(FletXController):
         super().__init__()
 
 class CounterPage(FletXPage):
-    ctrl = CounterController()
+    ctrl = CounterController()  # 'ctrl' is a convention; you can name it anything
+
+    @obx
+    def counter_text(self):
+        return ft.Text(f"Count: {self.ctrl.count.value}", size=40)
 
     def build(self):
         return ft.Column([
-            ft.Text(lambda: f"Count: {self.ctrl.count.value}", size=40),
+            self.counter_text(),
             ft.ElevatedButton("+1", on_click=lambda e: self.ctrl.count.increment())
         ])
 ```
 
 What to notice:
 
-- The `Text` uses a `lambda:` so it re-renders when `count` changes.
+- The `@obx` decorator makes the method reactive — it re-renders when `count` changes.
 - The button calls a controller method that mutates reactive state.
+- `ctrl` is just a variable name; you can use any name you prefer.
 
 ---
 
@@ -102,7 +108,7 @@ What to notice:
 Key ideas:
 
 - Use `Rx*` types (`RxInt`, `RxStr`, `RxList`, `RxDict`, …) for observable state.
-- Bind widgets with `lambda:` or reactive decorators so they update automatically.
+- Use `@obx` decorator or reactive decorators so widgets update automatically.
 - Keep computations inside the controller; keep the page mostly declarative.
 
 Tiny example:
@@ -122,13 +128,18 @@ class HelloController(FletXController):
 ```python
 import flet as ft
 from fletx.core import FletXPage
+from fletx.decorators import obx
 
 class HelloPage(FletXPage):
     ctrl = HelloController()
 
+    @obx
+    def greeting(self):
+        return ft.Text(f"Hello, {self.ctrl.name.value}!")
+
     def build(self):
         return ft.Column([
-            ft.Text(lambda: f"Hello, {self.ctrl.name.value}!"),
+            self.greeting(),
             ft.TextField(on_change=lambda e: self.ctrl.set_name(e.control.value))
         ])
 ```
@@ -182,9 +193,12 @@ class UserService:
     def fetch_user(self, user_id: str) -> dict:
         return {"id": user_id, "name": "Jane"}
 
+# Register the service with DI container (typically in main.py or app setup)
+from fletx.core import FletX
+FletX.put(UserService)  # Register as singleton
+
 class UserController(FletXController):
     def __init__(self):
-        from fletx.core import FletX
         self.user_service = FletX.find(UserService)
         self.user = RxDict({})
         super().__init__()
@@ -258,6 +272,7 @@ app.run()
 # pages/counter.py
 import flet as ft
 from fletx.core import FletXPage, FletXController, RxInt
+from fletx.decorators import obx
 
 class CounterController(FletXController):
     def __init__(self):
@@ -267,9 +282,13 @@ class CounterController(FletXController):
 class CounterPage(FletXPage):
     ctrl = CounterController()
 
+    @obx
+    def count_display(self):
+        return ft.Text(f"{self.ctrl.count.value}", size=40)
+
     def build(self):
         return ft.Column([
-            ft.Text(lambda: f"{self.ctrl.count.value}", size=40),
+            self.count_display(),
             ft.ElevatedButton("Increment", on_click=lambda e: self.ctrl.count.increment()),
         ])
 ```
@@ -284,6 +303,7 @@ class CounterPage(FletXPage):
 - Getting Started → `State Management`
 - Getting Started → `Dependency Injection`
 - Sample project: `Getting Started → Sample Project`
+- Real-world example: [Fake Shop E-commerce App](https://github.com/AllDotPy/fake-shop)
 
 ---
 

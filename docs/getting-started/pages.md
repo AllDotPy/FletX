@@ -1,4 +1,258 @@
-# Using Pages in FletX
+#### Introduction
+
+Pages are the heart of every FletX application — each one represents a screen or view that users can interact with.
+
+In this guide, you’ll learn how to create, structure, and manage pages effectively using the FletXPage class.
+
+We’ll start simple, then progressively explore lifecycle hooks, controllers, navigation, and best practices to help you build smooth, dynamic apps.
+
+#### 1. Using Pages in 
+
+#### What Are `Pages in FletX` ?
+
+In a FletX application, a page represents a screen or view — similar to ft.Page in Flet, but with extra powers.
+
+#### What is a `FletXPage`?
+A FletX page is built with the `FletXPage` class, which extends `ft.Container` and adds advanced features such as:
+
+Page lifecycle hooks (on_init, on_destroy)
+
+Access to context and routing
+
+Reactive updates from controllers
+
+Page-level utilities (snackbars, loaders, dialogs, etc.)
+
+Keyboard shortcuts and effects management
+
+In short, a FletXPage lets you define what appears on screen and how it behaves within your app.FletX
+
+#### A Simple “Hello Page” Example
+
+Let’s start small!
+Here’s a minimal page you can create with FletX:
+``` python
+import flet as ft
+from fletx import FletXPage
+
+class HelloPage(FletXPage):
+    def build(self):
+        return ft.Column([
+            ft.Text("👋 Hello from FletX!"),
+            ft.ElevatedButton("Click Me", on_click=self.say_hello)
+        ])
+    
+    def say_hello(self, _):
+        self.show_snackbar("Welcome to your first FletX page!")
+```
+
+This simple example shows:
+
+How build() defines what’s visible on the page.
+
+How a button triggers a page utility method (show_snackbar()).
+
+#### Understanding the Page Lifecycle
+
+Each FletXPage goes through several stages from creation to destruction.
+Knowing these helps you manage setup, cleanup, and reactivity properly.
+
+### | State          | What It Means                                       |
+    | -------------- | --------------------------------------------------- |
+    | `INITIALIZING` | The page is being set up (not visible yet).         |
+    | `MOUNTED`      | The page is now part of the UI tree.                |
+    | `ACTIVE`       | The page is visible and ready for user interaction. |
+    | `INACTIVE`     | The page is still mounted but not currently active. |
+    | `UNMOUNTING`   | The page is being removed.                          |
+    | `DISPOSED`     | The page has been destroyed and cleaned up.         |
+
+You can use lifecycle hooks to react to these stages.
+
+#### Lifecycle Hook Methods
+`on_init(self)`
+
+Runs before the page becomes visible.
+You typically use this to:
+
+Fetch or prepare data
+
+Subscribe to controller signals
+
+Set up event listeners or effects
+
+`on_destroy(self)`
+
+Runs right before the page is destroyed.
+Use it to:
+
+Unsubscribe from listeners
+
+Stop background tasks
+
+Release resources
+
+#### Example:
+``` python
+def on_init(self):
+    print("Page initialized!")
+
+def on_destroy(self):
+    print("Cleaning up resources...")
+```
+
+#### Defining the Page UI with build()
+
+Every page must define a build() method that returns the layout.
+
+``` python
+def build(self):
+    return ft.Column([
+        ft.Text("My First Page", size=24),
+        ft.ElevatedButton("Show Dialog", on_click=self.show_welcome)
+    ])
+```
+This method should be pure and fast — it’s called automatically whenever the page updates or rerenders.
+
+#### Adding Interactivity and Side Effects
+
+FletX pages often listen to controller state or reactive values.
+You can subscribe to them easily:
+``` python
+self.controller.is_loading.listen(self.show_loader)
+self.controller.error_message.listen(self.show_snackbar)
+```
+These subscriptions are automatically cleaned up when the page is destroyed, so you don’t need to unsubscribe manually.
+
+#### Adding Keyboard Shortcuts
+
+FletX allows you to register page-specific keyboard shortcuts to make navigation and actions faster.
+
+``` python
+self.add_keyboard_shortcut("ctrl+r", self.refresh, "Reload data")
+self.add_keyboard_shortcut("ctrl+h", self.go_home, "Go to home")
+```
+Shortcuts are active only when the page is mounted or active.
+
+#### Working with Controllers
+
+Controllers manage logic and data, while pages focus on UI.
+A page can easily connect to a controller and react to its state.
+
+#### Example:
+
+``` python
+from fletx import FletX, FletXPage
+from controllers.home_controller import HomeController
+
+class HomePage(FletXPage):
+    def __init__(self):
+        super().__init__(enable_keyboard_shortcuts=True)
+        self.controller = FletX.put(HomeController(), 'home_controller')
+
+    def on_init(self):
+        self.controller.load_data()
+        self.controller.is_loading.listen(self.show_loader)
+        self.controller.error_message.listen(self.show_snackbar)
+
+    def build(self):
+        return ft.Column([
+            ft.Text("🏠 Home Page", size=22),
+            ft.ElevatedButton("Refresh", on_click=self.refresh),
+        ])
+
+    def refresh(self, _):
+        self.controller.load_data()
+```
+Here:
+
+FletX.put() injects and stores the controller.
+
+The page listens to its reactive states.
+
+The page updates automatically when controller data changes.
+
+#### Navigating Between Pages
+
+You can navigate between pages using the router object:
+
+``` python
+self.router.go("/about")
+```
+Routes must be registered in your app configuration so FletX knows which FletXPage to render.
+
+#### Complete Example – A Counter Page
+
+Here’s a small but complete example tying everything together:
+
+``` python
+import flet as ft
+from fletx import FletXPage, FletX
+
+class CounterController:
+    def __init__(self):
+        self.count = FletX.signal(0)
+
+    def increment(self):
+        self.count.value += 1
+
+class CounterPage(FletXPage):
+    def __init__(self):
+        super().__init__(padding=20, enable_keyboard_shortcuts=True)
+        self.controller = CounterController()
+        self.controller.count.listen(self.update_ui)
+        self.add_keyboard_shortcut("ctrl+i", self.increment, "Increase count")
+
+    def build(self):
+        self.text = ft.Text(f"Count: {self.controller.count.value}", size=24)
+        return ft.Column([
+            self.text,
+            ft.ElevatedButton("Increment", on_click=self.increment)
+        ])
+
+    def increment(self, _=None):
+        self.controller.increment()
+        self.show_snackbar("Count increased!")
+
+    def update_ui(self, _):
+        self.text.value = f"Count: {self.controller.count.value}"
+        self.update()
+```
+This example demonstrates:
+
+A simple reactive state (count)
+
+Listening for changes
+
+Updating the UI dynamically
+
+Adding keyboard shortcuts
+
+#### Useful Page Utilities
+#### | Method                    | Description                                 |
+     | ------------------------- | ------------------------------------------- |
+     | `show_snackbar()`         | Displays a temporary message at the bottom. |
+     | `show_dialog()`           | Opens a dialog box.                         |
+     | `show_loader()`           | Shows or hides a loading indicator.         |
+     | `show_bottom_sheet()`     | Displays a bottom sheet.                    |
+     | `add_keyboard_shortcut()` | Adds contextual keyboard shortcuts.         |
+
+You can use these utilities anywhere inside your page for smooth UX.
+
+#### Best Practices
+
+✅ Keep your UI lightweight — move logic to controllers.
+✅ Use lifecycle hooks for setup and cleanup.
+✅ Avoid side effects directly in build().
+✅ Reuse components across pages for consistency.
+✅ Keep each page focused on one major responsibility.
+
+#### Next Steps
+
+- Learn about [Routing in FletX](routing.md)
+- Explore [Dependency Injection in FletX](guides/dependency-injection.md)
+- Understand the [Architecture Overview](architecture.md)
+
+<!-- # Using Pages in 
 ### 🔷 What is a `FletXPage`?
 
 A `FletXPage` represents **a single screen or view** in a FletX application. It is the fundamental building block of the user interface and typically corresponds to a page the user navigates to.
@@ -192,4 +446,4 @@ class HomePage(FletXPage):
 
 * Explore the [Routing System](routing.md)
 * Learn about the [Architecture](architecture.md)
-* Dive into [dependency injection](guides/dependency-injection.md)
+* Dive into [dependency injection](guides/dependency-injection.md) -->

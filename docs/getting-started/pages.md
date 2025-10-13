@@ -159,8 +159,9 @@ class HomePage(FletXPage):
             ft.Text("🏠 Home Page", size=22),
             ft.ElevatedButton("Refresh", on_click=self.refresh),
         ])
-
+    
     def refresh(self, _):
+        super().refresh(_)  
         self.controller.load_data()
 ```
 Here:
@@ -185,15 +186,18 @@ Routes must be registered in your app configuration so FletX knows which FletXPa
 Here’s a small but complete example tying everything together:
 
 ``` python
+from fletx.core import FletXPage
+from fletx import FletX
 import flet as ft
-from fletx import FletXPage, FletX
+
 
 class CounterController:
     def __init__(self):
         self.count = FletX.signal(0)
 
     def increment(self):
-        self.count.value += 1
+      self.count.increment() 
+
 
 class CounterPage(FletXPage):
     def __init__(self):

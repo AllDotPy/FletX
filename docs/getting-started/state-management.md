@@ -47,9 +47,6 @@ def increment():
     count.value += 1  # UI updates automatically ✨
 ```
 
-</tab>
-</tabs>
-
 > 💡 **Tip:** Reactive variables wrap your data type (e.g., int, str, bool) and automatically notify widgets that depend on them.
 
 ---
@@ -113,9 +110,6 @@ class CounterController(Controller):
 # Usage in main
 ctrl = CounterController()
 ```
-
-</tab>
-</tabs>
 
 > ✅ **Why this matters:** It separates UI (presentation) from logic (state management), making your app easier to maintain and test.
 
@@ -375,6 +369,8 @@ FletX works great with async Python — perfect for API calls and background tas
 ```python
 from fletx import Controller, RxBool, RxStr
 import flet as ft
+import asyncio
+
 
 class DataController(Controller):
     def __init__(self):
@@ -385,25 +381,36 @@ class DataController(Controller):
     async def fetch_data(self):
         self.is_loading.value = True
         self.error.value = ""
-
         try:
-            # Simulate API call
-            await asyncio.sleep(1)
+            await asyncio.sleep(1)  # Simulate API call
             self.data.value = "Data loaded!"
         except Exception as e:
             self.error.value = str(e)
         finally:
             self.is_loading.value = False
 
+
 def main(page: ft.Page):
     ctrl = DataController()
 
     page.add(
-        ft.Column([
-            obx(lambda: ft.Text("Loading..." if ctrl.is_loading.value else ctrl.data.value)),
-            ft.ElevatedButton("Load", on_click=lambda e: ctrl.fetch_data())
-        ])
+        ft.Column(
+            [
+                obx(
+                    lambda: ft.Text(
+                        "Loading..."
+                        if ctrl.is_loading.value
+                        else ctrl.data.value
+                    )
+                ),
+                ft.ElevatedButton(
+                    "Load",
+                    on_click=lambda e: ctrl.fetch_data(),
+                ),
+            ]
+        )
     )
+
 
 ft.app(target=main)
 ```
@@ -546,6 +553,7 @@ Here's a complete example showing everything working together:
 import flet as ft
 from fletx import Controller, reactive_list, RxStr, computed, batch
 
+
 class TodoController(Controller):
     def __init__(self):
         self.todos = reactive_list([])
@@ -556,7 +564,7 @@ class TodoController(Controller):
     def filtered_todos(self):
         if self.filter.value == "active":
             return [t for t in self.todos if not t["completed"]]
-        elif self.filter.value == "completed":
+        if self.filter.value == "completed":
             return [t for t in self.todos if t["completed"]]
         return list(self.todos)
 
@@ -566,18 +574,16 @@ class TodoController(Controller):
 
     def add_todo(self, text):
         if text.strip():
-            self.todos.append({
-                "id": self._next_id,
-                "text": text.strip(),
-                "completed": False
-            })
+            self.todos.append(
+                {"id": self._next_id, "text": text.strip(), "completed": False}
+            )
             self._next_id += 1
 
     def toggle_todo(self, todo_id):
         for todo in self.todos:
             if todo["id"] == todo_id:
                 todo["completed"] = not todo["completed"]
-                self.todos.notify()  # Trigger update
+                self.todos.notify()
                 break
 
     def delete_todo(self, todo_id):
@@ -587,25 +593,34 @@ class TodoController(Controller):
     def clear_completed(self):
         self.todos[:] = [t for t in self.todos if not t["completed"]]
 
+
 def main(page: ft.Page):
     ctrl = TodoController()
 
     def build_todo_list():
-        return ft.Column([
-            ft.Text(f"Active: {ctrl.active_count.value}"),
-            ft.Column([
-                ft.Checkbox(
-                    label=todo["text"],
-                    value=todo["completed"],
-                    on_change=lambda e, tid=todo["id"]: ctrl.toggle_todo(tid)
-                )
-                for todo in ctrl.filtered_todos.value
-            ])
-        ])
+        return ft.Column(
+            [
+                ft.Text(f"Active: {ctrl.active_count.value}"),
+                ft.Column(
+                    [
+                        ft.Checkbox(
+                            label=todo["text"],
+                            value=todo["completed"],
+                            on_change=lambda e, tid=todo["id"]: ctrl.toggle_todo(
+                                tid
+                            ),
+                        )
+                        for todo in ctrl.filtered_todos.value
+                    ]
+                ),
+            ]
+        )
 
     page.add(obx(build_todo_list))
 
+
 ft.app(target=main)
+
 ```
 
 ---

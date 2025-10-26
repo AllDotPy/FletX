@@ -11,6 +11,7 @@ from fletx.decorators.reactive import (
     reactive_when, reactive_computed
 )
 from fletx.decorators.controllers import page_controller, with_controller
+from fletx.decorators.page import page_config
 from fletx.decorators.route import register_router
 from fletx.decorators.effects import use_effect
 from fletx.core.concurency.worker import worker_task, parallel_task
@@ -40,6 +41,7 @@ __all__ = [
     # Controllers
     "page_controller",
     "with_controller",
+    "page_config",
 
     # Routing
     "register_router",

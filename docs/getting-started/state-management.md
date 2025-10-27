@@ -4,14 +4,6 @@
 
 ---
 
-**Requirements:**
-
-- FletX: `0.1.0+`
-- Flet: `0.23.0+`
-- Python: `3.8+`
-
----
-
 ## What Is Reactive State Management?
 
 In traditional Python apps, changing a variable doesn't affect your UI automatically — you must manually tell it to refresh.
@@ -25,7 +17,7 @@ Think of it like:
 
 ## ⚖️ Static vs. Reactive Variables
 
-#### Static (Non-Reactive)
+#### 🧱 Static (Non-Reactive)
 
 ```python
 count = 0
@@ -36,10 +28,14 @@ def increment():
     print(count)  # UI doesn't update automatically
 ```
 
-#### Reactive (FletX)
+Static variables store data but **don’t trigger any automatic UI refresh**, you’d need to manually call a render or update function whenever the value changes.
+
+---
+
+#### ⚡ Reactive (FletX)
 
 ```python
-from fletx import RxInt
+from fletx.core import RxInt
 
 count = RxInt(0)
 
@@ -47,7 +43,16 @@ def increment():
     count.value += 1  # UI updates automatically ✨
 ```
 
-> 💡 **Tip:** Reactive variables wrap your data type (e.g., int, str, bool) and automatically notify widgets that depend on them.
+Reactive variables are **data wrappers** (e.g., `RxInt`, `RxStr`, `RxBool`) that:
+
+- Keep track of their dependencies.
+- Automatically notify bound widgets or observers when their value changes.
+- Make state updates seamless — no manual re-rendering.
+
+---
+
+> 💡 **Tip:** Use reactive types when you want automatic UI updates or computed state reactions.
+> For static data that never changes, plain Python variables are fine.
 
 ---
 
@@ -55,7 +60,8 @@ def increment():
 
 ```python
 import flet as ft
-from fletx import RxInt, obx
+from fletx.core import RxInt
+from fletx.widgets import obx
 
 count = RxInt(0)
 
@@ -98,17 +104,22 @@ def increment():
 #### With Controller
 
 ```python
-from fletx import Controller, RxInt
+from fletx.core.controller import FletXController
+from fletx.core import RxInt
 
-class CounterController(Controller):
+
+class CounterController(FletXController):
     def __init__(self):
+        super().__init__()
         self.count = RxInt(0)
 
     def increment(self):
         self.count.value += 1
 
-# Usage in main
+
+# Usage example
 ctrl = CounterController()
+
 ```
 
 > ✅ **Why this matters:** It separates UI (presentation) from logic (state management), making your app easier to maintain and test.
@@ -117,7 +128,9 @@ ctrl = CounterController()
 
 ```python
 import flet as ft
-from fletx import Controller, RxInt, obx
+from fletx.core.controller import FletXController as Controller
+from fletx.core import RxInt
+from fletx.widgets.obx import Obx
 
 class CounterController(Controller):
     def __init__(self):
@@ -131,7 +144,7 @@ def main(page: ft.Page):
 
     page.add(
         ft.Column([
-            obx(lambda: ft.Text(f"Count: {ctrl.count.value}")),
+            Obx(lambda: ft.Text(f"Count: {ctrl.count.value}")),
             ft.ElevatedButton("Increment", on_click=lambda e: ctrl.increment())
         ])
     )
@@ -160,17 +173,18 @@ ft.app(target=main)
 
 ```python
 import flet as ft
-from fletx import reactive_list, obx
+from fletx.core.state import RxList
+from fletx.widgets.obx import Obx
 
-tasks = reactive_list(["Learn FletX", "Write Docs"])
+tasks = RxList(["Learn FletX", "Write Docs"])
 
 def main(page: ft.Page):
     def add_task(e):
-        tasks.append("New Task")
+        tasks.append(f"New Task {len(tasks) + 1}")
 
     page.add(
         ft.Column([
-            obx(lambda: ft.Column([ft.Text(t) for t in tasks])),
+            Obx(lambda: ft.Column([ft.Text(t) for t in tasks])),
             ft.ElevatedButton("Add Task", on_click=add_task)
         ])
     )
@@ -187,92 +201,56 @@ ft.app(target=main)
 Sometimes, a variable depends on others — you can create a **computed** value that updates automatically.
 
 ```python
-from fletx import RxInt, computed, obx
 import flet as ft
+from fletx.core.state import RxInt, Computed
+from fletx.widgets.obx import Obx
 
 price = RxInt(10)
 quantity = RxInt(2)
 
-# Create a computed value
-total = computed(lambda: price.value * quantity.value)
+# Create a computed value that auto-updates
+total = Computed(lambda: price.value * quantity.value)
 
 def main(page: ft.Page):
     page.add(
-        obx(lambda: ft.Text(f"Total: ${total.value}"))
+        Obx(lambda: ft.Text(f"Total: ${total.value}"))
     )
 
 ft.app(target=main)
+
 ```
 
 > ✅ **Result:** Changing either `price` or `quantity` updates `total` instantly.
 
 ---
 
-## 👀 Watching for State Changes
-
-Sometimes, you don't want to rebuild the UI — just **react to changes** logically.
-
-#### Single Watch
-
-```python
-def on_count_change(value):
-    print(f"Count changed to {value}")
-
-# Set up watcher
-ctrl.count.watch(on_count_change)
-```
-
-#### Multiple Watch
-
-```python
-from fletx import watch_multiple
-
-def on_state_change():
-    print("Either count or username changed!")
-
-watch_multiple([ctrl.count, ctrl.username], on_state_change)
-```
-
-> 💡 **When to use:** Ideal for logging, analytics, or triggering side effects like network calls.
-
-> ⚠️ **Important:** Remember to dispose of watchers when they're no longer needed to prevent memory leaks (see Cleanup section below).
-
----
-
-## 🔍 Deep Watching (Lists & Dicts)
-
-Reactive lists and dicts also trigger watchers when modified:
-
-```python
-from fletx import reactive_list
-
-tasks = reactive_list(["Learn", "Write"])
-
-def on_tasks_update(new_value):
-    print("Tasks updated:", new_value)
-
-tasks.watch(on_tasks_update)
-tasks.append("Deploy")  # triggers watcher
-```
-
-> This allows you to track dynamic data like user input, notifications, or live updates.
-
----
-
 ## ⚙️ Batch Updates (Efficient State Mutations)
 
-When multiple state updates happen together, FletX lets you group them efficiently.
+When multiple reactive state updates happen together, FletX lets you group them efficiently using a batching context.
+
+This ensures updates trigger **only one UI refresh**, improving performance in reactive UIs.
 
 ```python
-from fletx import RxInt, batch
+import asyncio
+from fletx.core.state import RxInt
+from fletx.decorators.reactive import reactive_batch
 
 count = RxInt(0)
 double = RxInt(0)
 
-@batch
+@reactive_batch()
 def increment_both():
     count.value += 1
     double.value = count.value * 2
+
+# Run inside an asyncio event loop
+async def main():
+    increment_both()
+    await asyncio.sleep(0)  # allow batch to flush
+    print(count.value, double.value)
+
+asyncio.run(main())
+
 ```
 
 > ✅ Only **one** UI refresh occurs after the batched updates — improving performance.
@@ -311,69 +289,21 @@ if count.value > 3:
 
 ---
 
-## 🧹 Cleanup & Memory Management
-
-When using watchers, it's important to clean them up to prevent memory leaks.
-
-```python
-from fletx import Controller, RxInt
-
-class MyController(Controller):
-    def __init__(self):
-        self.count = RxInt(0)
-        self._watchers = []
-
-    def setup(self):
-        # Store watcher reference for later cleanup
-        watcher = self.count.watch(self._on_count_change)
-        self._watchers.append(watcher)
-
-    def _on_count_change(self, value):
-        print(f"Count: {value}")
-
-    def dispose(self):
-        # Clean up watchers when controller is no longer needed
-        for watcher in self._watchers:
-            watcher.dispose()
-        self._watchers.clear()
-```
-
-> 💡 **Pro Tip:** Always dispose of watchers when components are removed or the app closes.
-
----
-
-## 🔗 Coordinating Multiple States
-
-You can link multiple reactive variables together easily:
-
-```python
-from fletx import RxInt, watch_multiple
-
-a = RxInt(0)
-b = RxInt(0)
-
-def show_sum():
-    print(f"a + b = {a.value + b.value}")
-
-watch_multiple([a, b], show_sum)
-```
-
-Every time `a` or `b` changes, the sum recalculates.
-
----
-
 ## 🌐 Async Operations
 
 FletX works great with async Python — perfect for API calls and background tasks.
 
 ```python
-from fletx import Controller, RxBool, RxStr
 import flet as ft
 import asyncio
+from fletx.core.state import RxBool, RxStr
+from fletx.core.controller import FletXController as Controller
+from fletx.widgets.obx import Obx
 
 
 class DataController(Controller):
     def __init__(self):
+        super().__init__()
         self.is_loading = RxBool(False)
         self.data = RxStr("")
         self.error = RxStr("")
@@ -382,7 +312,7 @@ class DataController(Controller):
         self.is_loading.value = True
         self.error.value = ""
         try:
-            await asyncio.sleep(1)  # Simulate API call
+            await asyncio.sleep(1)  # simulate API call
             self.data.value = "Data loaded!"
         except Exception as e:
             self.error.value = str(e)
@@ -393,19 +323,27 @@ class DataController(Controller):
 def main(page: ft.Page):
     ctrl = DataController()
 
+    def run_async_task(coro):
+        try:
+            loop = asyncio.get_running_loop()
+        except RuntimeError:
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+        loop.run_until_complete(coro)
+
     page.add(
         ft.Column(
             [
-                obx(
+                Obx(
                     lambda: ft.Text(
                         "Loading..."
                         if ctrl.is_loading.value
-                        else ctrl.data.value
+                        else ctrl.data.value or f"Error: {ctrl.error.value}"
                     )
                 ),
                 ft.ElevatedButton(
                     "Load",
-                    on_click=lambda e: ctrl.fetch_data(),
+                    on_click=lambda e: run_async_task(ctrl.fetch_data()),
                 ),
             ]
         )
@@ -413,6 +351,7 @@ def main(page: ft.Page):
 
 
 ft.app(target=main)
+
 ```
 
 ---
@@ -428,20 +367,6 @@ def test_counter():
     count = RxInt(0)
     count.value += 1
     assert count.value == 1
-```
-
-#### Testing Watchers
-
-```python
-def test_watcher():
-    updates = []
-    count = RxInt(0)
-    count.watch(lambda v: updates.append(v))
-
-    count.value = 5
-    count.value = 10
-
-    assert updates == [5, 10]
 ```
 
 #### Testing Controllers
@@ -551,32 +476,42 @@ Here's a complete example showing everything working together:
 
 ```python
 import flet as ft
-from fletx import Controller, reactive_list, RxStr, computed, batch
+from fletx.core.controller import FletXController as Controller
+from fletx.core.state import RxList, RxStr, Computed
+from fletx.decorators.reactive import reactive_batch
+from fletx.widgets.obx import Obx
 
 
 class TodoController(Controller):
     def __init__(self):
-        self.todos = reactive_list([])
-        self.filter = RxStr("all")  # all, active, completed
+        super().__init__()
+        self.todos = RxList([])
+        self.filter = RxStr("all")
         self._next_id = 1
 
-    @computed
-    def filtered_todos(self):
+        # ✅ Computed values defined properly
+        self.filtered_todos = Computed(self._compute_filtered_todos)
+        self.active_count = Computed(self._compute_active_count)
+
+    # -- Computed logic --
+    def _compute_filtered_todos(self):
         if self.filter.value == "active":
             return [t for t in self.todos if not t["completed"]]
         if self.filter.value == "completed":
             return [t for t in self.todos if t["completed"]]
         return list(self.todos)
 
-    @computed
-    def active_count(self):
+    def _compute_active_count(self):
         return sum(1 for t in self.todos if not t["completed"])
 
+    # -- Core actions --
     def add_todo(self, text):
         if text.strip():
-            self.todos.append(
-                {"id": self._next_id, "text": text.strip(), "completed": False}
-            )
+            self.todos.append({
+                "id": self._next_id,
+                "text": text.strip(),
+                "completed": False,
+            })
             self._next_id += 1
 
     def toggle_todo(self, todo_id):
@@ -589,34 +524,28 @@ class TodoController(Controller):
     def delete_todo(self, todo_id):
         self.todos[:] = [t for t in self.todos if t["id"] != todo_id]
 
-    @batch
     def clear_completed(self):
-        self.todos[:] = [t for t in self.todos if not t["completed"]]
+        with reactive_batch():
+            self.todos[:] = [t for t in self.todos if not t["completed"]]
 
 
 def main(page: ft.Page):
     ctrl = TodoController()
 
     def build_todo_list():
-        return ft.Column(
-            [
-                ft.Text(f"Active: {ctrl.active_count.value}"),
-                ft.Column(
-                    [
-                        ft.Checkbox(
-                            label=todo["text"],
-                            value=todo["completed"],
-                            on_change=lambda e, tid=todo["id"]: ctrl.toggle_todo(
-                                tid
-                            ),
-                        )
-                        for todo in ctrl.filtered_todos.value
-                    ]
-                ),
-            ]
-        )
+        return ft.Column([
+            ft.Text(f"Active: {ctrl.active_count.value}"),
+            ft.Column([
+                ft.Checkbox(
+                    label=todo["text"],
+                    value=todo["completed"],
+                    on_change=lambda e, tid=todo["id"]: ctrl.toggle_todo(tid),
+                )
+                for todo in ctrl.filtered_todos.value
+            ])
+        ])
 
-    page.add(obx(build_todo_list))
+    page.add(Obx(build_todo_list))
 
 
 ft.app(target=main)

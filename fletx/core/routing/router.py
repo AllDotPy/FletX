@@ -371,7 +371,7 @@ class FletXRouter:
             if not await guard.can_activate(route_info):
                 redirect_path = await guard.redirect_to(route_info)
                 if redirect_path:
-                    self.navigate(redirect_path, replace=True)
+                    await self.navigate(redirect_path, replace=True)
                     return NavigationResult.REDIRECTED
                 return NavigationResult.BLOCKED_BY_GUARD
         

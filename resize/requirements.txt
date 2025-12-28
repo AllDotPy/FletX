@@ -1,3 +1,0 @@
-# Core dependencies
-flet>=0.28.3
-fletxr>=0.1.4.b1

@@ -7,5 +7,5 @@ authors = [{ name = "{{ author }}", email = "" }]
 requires-python = ">={{ python_version }}"
 dependencies = [
     "fletxr=={{ fletx_version }}",
-    "flet[all]>=0.28.3",
+    "flet[all]==0.28.3",
 ]

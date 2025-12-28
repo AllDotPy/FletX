@@ -26,3 +26,4 @@ dist/*
 build/*
 **/test_routing.py
 examples/*
+setup_.py

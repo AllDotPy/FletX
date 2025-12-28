@@ -21,7 +21,6 @@ class RouteConfig:
     _routes: Dict[str, Type[FletXPage]] = {}  # pragma: no cover
     _logger = get_logger(__name__)
 
-    @classmethod
     @property
     def logger(cls):
         if not cls._logger:

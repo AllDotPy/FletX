@@ -6,7 +6,7 @@ readme = "PYPI.md"
 license = {file = "LICENSE"}
 authors = [{ name = "AllDotPy", email = "hello@alldotpy.com" }]
 maintainers = [{ name = "#Einswilli", email = "einswilligoeh@email.com" }]
-requires-python = "==3.12.*"
+requires-python = ">=3.10,<=3.13"
 keywords = [
     "fletx", "fletxr", "flet", "reactive state",
     "routing", "di", "dependency injection"
@@ -28,7 +28,7 @@ Repository = "https://github.com/AllDotPy/FletX"
 Documentation = "https://alldotpy.github.io/FletX"
 Tracker = "https://github.com/AllDotPy/FletX/issues"
 
-[project.optional-dependencies]
+[dependency-groups]
 dev = [
     "black", 
     "mypy",
@@ -36,6 +36,7 @@ dev = [
     "uv",
     "build",
     "pytest>=8.4.0", 
+    "pytest-asyncio>=1.3.0",
     "mkdocs>=1.6.1",
     "setuptools>=80.8.0",
     "mkdocs-material>=9.6.14",
@@ -44,6 +45,9 @@ dev = [
 
 [tool.setuptools]
 packages = ["fletx"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
 
 [build-system]
 requires = ["setuptools>=61.0", "wheel"]

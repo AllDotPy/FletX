@@ -85,7 +85,7 @@ Perfect for building **desktop, web, and mobile apps** with Python at lightning 
 
 ## Quick Start 🏁
 
-> NOTE: FletX currently supports Python 3.12 only. Compatibility with newer versions is in progress — we're actively working to expand support soon.
+> NOTE: FletX currently supports Python `>=3.10,<=3.13`. Compatibility with newer versions is in progress — we're actively working to expand support soon.
 
 ### Installation
 ```bash

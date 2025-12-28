@@ -49,7 +49,6 @@ class FletXWidget(ABC):
         FletXWidgetRegistry.register(cls)
         cls.page.update()
         
-    @classmethod
     @property
     def logger(cls):
         if not cls._logger:

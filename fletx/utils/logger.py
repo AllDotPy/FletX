@@ -31,7 +31,6 @@ class SharedLogger:
         return cls._logger
     
     @property
-    @classmethod
     def logger(self) -> logging.Logger:
         return self.get_logger()
     

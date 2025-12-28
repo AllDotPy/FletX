@@ -67,13 +67,10 @@ class Observer:
         self.active = True
         self.auto_dispose = auto_dispose
         self._dependencies = set()
-        self._logger = get_logger("FletX.Observer")
 
     @property
     def logger(self):
-        if not self._logger:
-            self._logger = get_logger('FletX.Observer')
-        return self._logger
+        return get_logger('FletX.Observer')
     
     def add_dependency(self, dependency):
         """
@@ -129,7 +126,6 @@ class Reactive(Generic[T]):
         self._value = initial_value
         self._observers: Set[Observer] = set()
 
-    @classmethod
     @property
     def logger(cls):
         if not cls._logger:

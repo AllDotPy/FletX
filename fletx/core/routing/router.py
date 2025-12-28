@@ -46,7 +46,6 @@ class FletXRouter:
     """
     
     _instance: Optional['FletXRouter'] = None
-    _logger = get_logger('FletX.Router')
     
     def __init__(
         self, 
@@ -72,12 +71,9 @@ class FletXRouter:
         # an old version of fletx router
         self.to = self.navigate
 
-    @classmethod
     @property
     def logger(cls):
-        if not cls._logger:
-            cls._logger = get_logger('FletX.Router')
-        return cls._logger
+        return get_logger('FletX.Router')
     
     @classmethod
     def get_instance(cls) -> 'FletXRouter':

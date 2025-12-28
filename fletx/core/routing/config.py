@@ -91,19 +91,14 @@ class RoutePattern:
 class RouterConfig:
     """Advanced router configuration manager."""
     
-    _logger = get_logger('FletX.RouterConfig')
-
     def __init__(self):
         self._routes: Dict[str, RouteDefinition] = {}
         self._route_patterns: List[tuple[RoutePattern, RouteDefinition]] = []
         self._modules: Dict[str, 'ModuleRouter'] = {}
 
-    @classmethod
     @property
     def logger(cls):
-        if not cls._logger:
-            cls._logger = get_logger('FletX.RouterConfig')
-        return cls._logger
+        return get_logger('FletX.RouterConfig')
     
     def add_route(
         self,
@@ -278,13 +273,9 @@ class ModuleRouter:
         # Add subrouters 
         self.add_subrouters(self.sub_routers)
 
-        self._logger = get_logger(f'FletX.ModuleRouter.{self.name}')
-
     @property
     def logger(self):
-        if not self._logger:
-            self._logger = get_logger(f'FletX.ModuleRouter.{self.name}')
-        return self._logger
+        return get_logger(f'FletX.ModuleRouter.{self.name}')
     
     def add_route(
         self, 

@@ -87,7 +87,6 @@ class Effect:
         self._last_deps = None
         self._logger = get_logger("FletX.Effect")
 
-    @classmethod
     @property
     def logger(cls):
         if not cls._logger:

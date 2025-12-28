@@ -26,14 +26,7 @@ class DI:
     """
     
     _instances: Dict[str, Any] = {}
-    _logger: ClassVar[logging.Logger] = get_logger("FletX.DI")
-
-    @classmethod
-    @property
-    def logger(cls):
-        if not cls._logger:
-            cls._logger = get_logger('FletX.DI')
-        return cls._logger
+    logger: ClassVar[logging.Logger] = get_logger("FletX.DI")
     
     @classmethod
     def put(cls, instance: T, tag: Optional[str] = None) -> T:

@@ -47,7 +47,6 @@ class FletXRouter:
     _middleware = RouteMiddleware()
     _guards: Dict[str, List[RouteGuard]] = {}
 
-    @classmethod
     @property
     def logger(cls):
         if not cls._logger:

@@ -186,14 +186,6 @@ class FletXPage(ft.Container, ABC):
 
         return None
     
-    def build_floating_action_button(self) -> Optional[ft.FloatingActionButton]:
-        """
-        Override this method to build a custom floating action button.
-        Return None if no floating action button is needed.
-        """
-
-        return None
-    
     def build_floating_action_button_location(self) -> Optional[ft.FloatingActionButtonLocation]:
         """
         Override this method to build a custom floating action button Location.
@@ -464,29 +456,35 @@ class FletXPage(ft.Container, ABC):
 
     # Event handling
     def on_resize(self, callback: Callable[[ft.ControlEvent], None]):
-        """Listen to page resize events"""
+        """
+        Listen to page resize events.
+        Event handler argument is of type `WindowResizeEvent`.
+        """
 
-        self._add_event_handler("resize", callback)
+        self._add_event_handler("resized", callback)
     
     def on_keyboard(self, callback: Callable[[ft.KeyboardEvent], None]):
         """Listen to keyboard events"""
 
-        self._add_event_handler("keyboard", callback)
+        self._add_event_handler("keyboard_event", callback)
     
     def on_error(self, callback: Callable[[Exception], None]):
         """Listen to error events"""
 
         self._add_event_handler("error", callback)
     
-    def on_focus(self, callback: Callable[[ft.ControlEvent], None]):
-        """Listen to focus events"""
+    def on_media_change(self, callback: Callable[[ft.ControlEvent], None]):
+        """
+        Listen to Page media change events.
+        Event handler argument is of type `PageMediaData`
+        """
 
-        self._add_event_handler("focus", callback)
+        self._add_event_handler("media_change", callback)
     
-    def on_blur(self, callback: Callable[[ft.ControlEvent], None]):
-        """Listen to blur events"""
+    def on_brigthness_change(self, callback: Callable[[ft.ControlEvent], None]):
+        """Listen to platform brigthness change events."""
 
-        self._add_event_handler("blur", callback)
+        self._add_event_handler("platform_brigthness_change", callback)
     
     def on_scroll(self, callback: Callable[[ft.ControlEvent], None]):
         """Listen to scroll events"""
@@ -713,6 +711,16 @@ class FletXPage(ft.Container, ABC):
 
         if self._enable_keyboard_shortcuts:
             self.on_keyboard(self._handle_keyboard_shortcuts)
+
+        # AUTO Page resize
+        def resize(e: ft.WindowResizeEvent):
+            """resizee page and refresh"""
+
+            self.width = e.width
+            self.height = e.height
+            self.refresh()
+            
+        self.on_resize(resize)
     
     def _handle_keyboard_shortcuts(self, e: ft.KeyboardEvent):
         """Handle keyboard shortcuts"""
@@ -808,7 +816,7 @@ class FletXPage(ft.Container, ABC):
         """Connect an event handler to Flet events"""
 
         page = self.page_instance
-        if page and hasattr(page, f'on_{event_name}_event'):
+        if page and hasattr(page, f'on_{event_name}'):
             def safe_handler(*args, **kwargs):
                 if self.is_mounted:
                     try:
@@ -817,8 +825,8 @@ class FletXPage(ft.Container, ABC):
                         self.logger.error(f"Error in {event_name} handler: {e}")
                         self._trigger_error_handlers(e)
             
-            setattr(page, f'on_{event_name}_event', safe_handler)
-            return lambda: setattr(page, f'on_{event_name}_event', None)
+            setattr(page, f'on_{event_name}', safe_handler)
+            return lambda: setattr(page, f'on_{event_name}', None)
         return None
     
     def _trigger_error_handlers(self, error: Exception):

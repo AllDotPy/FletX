@@ -22,7 +22,7 @@ class {{ name | pascal_case }}Page(FletXPage):
         # ...
 
     def on_init(self):
-        """Hook called when {{ name | pascal_case }}Page in initialized"""
+        """Hook called when {{ name | pascal_case }}Page is initialized"""
 
         print("{{ name | pascal_case }}Page is initialized")
 

@@ -7,6 +7,7 @@ from typing import Callable, Awaitable, Any, Union
 from importlib import import_module
 
 from fletx.utils.context import AppContext
+from fletx.utils.logger import SharedLogger
 
 # FletX Logger Utility
 def get_logger(name: str) -> logging.Logger:
@@ -16,8 +17,11 @@ def get_logger(name: str) -> logging.Logger:
     if base_logger is None:
 
         # Fallback if the context is not initialized
-        logger = logging.getLogger(name)
-        logger.addHandler(logging.NullHandler())
+        SharedLogger._initialize_logger(
+            name = 'FletX',
+        )
+        
+        logger = SharedLogger.get_logger(__name__) 
         return logger
     return base_logger.getChild(name)
 

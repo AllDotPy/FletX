@@ -10,6 +10,7 @@ Version: {{ version }}
 import flet as ft
 from fletx.app import FletXApp
 from app.routes import {{ project_name | pascal_case }}Router
+from app.utils.theme import light_theme, dark_theme
 
 def main():
     """Main entry point for the {{ project_name | pascal_case }} application."""
@@ -23,14 +24,12 @@ def main():
     
     # App Configuration
     app = FletXApp(
-        title="{{ project_name | pascal_case }}",
+        title = "{{ project_name | pascal_case }}",
         initial_route = "/",
         debug = True,
-        theme = ft.Theme(color_scheme_seed = ft.Colors.GREEN),
-        dark_theme = ft.Theme(
-            color_scheme_seed = ft.Colors.BLUE_800,
-            scaffold_bgcolor = ft.Colors.BLACK
-        ),
+        theme = light_theme,
+        dark_theme = dark_theme,
+        theme_mode= ft.ThemeMode.SYSTEM,
         window_config = {
             "width": 400,
             "height": 810,

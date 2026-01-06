@@ -20,7 +20,7 @@ class ComponentCommand(TemplateCommand):
         """Add arguments specific to the component command."""
         parser.add_argument(
             "type",
-            choices=["controller", "service", "model", "component", "page"],
+            choices=["controller", "service", "model", "component", "page", "middleware", "guard"],
             help="Type of component to generate"
         )
         parser.add_argument(
@@ -139,7 +139,9 @@ class ComponentCommand(TemplateCommand):
             "service": "service",
             "model": "model",
             "component": "component",
-            "page": "page"
+            "page": "page",
+            "middleware": "middleware",
+            "guard": "guard"
         }
         
         return template_mapping.get(component_type, "component")
@@ -153,7 +155,9 @@ class ComponentCommand(TemplateCommand):
             "service": "app/services", 
             "model": "app/models",
             "component": "app/components",
-            "page": "app/pages"
+            "page": "app/pages",
+            "middleware": "app/middlewares",
+            "guard": "app/guards"
         }
         
         return dir_mapping.get(component_type, "app/components")

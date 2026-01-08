@@ -7,19 +7,18 @@ and to facilitate the creation of robust and maintainable applications.
 
 from typing import (
     List, Callable, Any, Dict, 
-    Optional, TypeVar, Generic, Union
+    Optional, TypeVar, Union
 )
-from abc import ABC, abstractmethod
-from contextlib import contextmanager
 import asyncio
 import weakref
 import logging
 from enum import Enum
+
 from fletx.core.di import DI
 from fletx.core.effects import EffectManager
 from fletx.core.state import (
     Reactive, RxInt, RxStr, RxBool, RxList, RxDict, 
-    Computed, Observer, ReactiveDependencyTracker
+    Computed, Observer, # ReactiveDependencyTracker
 )
 from fletx.utils import get_logger, get_event_loop
 
@@ -54,7 +53,7 @@ class ControllerEvent:
         self.type = type
         self.data = data
         self.source = source
-        self.timestamp = get_event_loop().time()
+        # self.timestamp = get_event_loop().time()
 
 
 ####
@@ -368,7 +367,7 @@ class FletXController:
         self._is_ready.value = current_state == ControllerState.READY
         
         # Emit appropiated events
-        self.emit_local(f"state_changed", current_state)
+        self.emit_local("state_changed", current_state)
         
         # Call the appropriate lifecycle hook
         # Controller is initialized
@@ -536,7 +535,7 @@ class FletXController:
         self._event_bus.emit(event_type, data)
 
     def emit_global(self, event_type: str, data: Any = None):
-        """Émit an event globally (reactive)"""
+        """Emit an event globally (reactive)"""
 
         self._check_not_disposed()
         self._global_event_bus.emit(event_type, data)
@@ -665,7 +664,7 @@ class FletXController:
         self, 
         callback: Callable[[], None]
     ) -> Observer:
-        """Listen changes withn local context"""
+        """Listen changes within local context"""
 
         self._check_not_disposed()
         return self._context.listen(callback)

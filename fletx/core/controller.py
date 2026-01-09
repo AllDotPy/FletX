@@ -373,6 +373,9 @@ class FletXController:
         # Controller is initialized
         if current_state == ControllerState.INITIALIZED:
             self.on_initialized()
+
+            # Now ready the controller
+            self.ready()
         
         # Controller is ready?
         elif current_state == ControllerState.READY:

@@ -18,7 +18,7 @@ from fletx.core.routing.models import (
     NavigationResult, IRouteResolver
 )
 from fletx.utils import (
-    get_event_loop, run_async, get_logger
+    get_event_loop, run_async, get_logger  # noqa: F401
 )
 
 

@@ -2,18 +2,16 @@
 ObX Widget - Reactive Builder for FletX
 """
 
-import weakref, time
-from uuid import uuid4
 from typing import (
-    Set, Union, List, Callable, Optional, Any,
-    Type, Dict
+    Set, Callable, Optional,
+    Type
 )
-from functools import wraps
+from functools import wraps  # noqa: F401
 
 import flet as ft
 from flet import Control, Ref
 from fletx.core.state import Reactive, ReactiveDependencyTracker
-from fletx.utils import get_logger, get_page
+from fletx.utils import get_logger, get_page  # noqa: F401
 
 
 ####
@@ -28,13 +26,11 @@ class ObxController:
         self._dependencies: Set[Reactive] = set()
         self._builder: Optional[Callable] = None
         # self._current_uid = None 
-        self._logger = get_logger("FletX.ObxController")
+        self._logger = get_logger("ObxController")
         self._is_building = False
 
     @property
     def logger(self):
-        if not self._logger:
-            self._logger = get_logger('FletX.ObxController')
         return self._logger
     
     def set_uid(self, uid:str):
@@ -64,6 +60,8 @@ class ObxController:
 
     def _rebuild(self):
         """Rebuild the widget when dependencies change"""
+
+        self._logger.debug("Rebuilding widget due to dependency change")
 
         if self._is_building:
             self.logger.warning(
@@ -135,7 +133,7 @@ class ObxController:
         for dep in list(self._dependencies):
             try:
                 dep._remove_observer(self)
-            except:
+            except:  # noqa: E722
                 pass
         self._dependencies.clear()
         self._widget_ref = None
@@ -195,7 +193,7 @@ class Obx:
         self.ref: Optional[Ref] = None
         self._final_uid = f"obx_{id(self)}"  
         self._is_mounted = False
-        self._logger = get_logger("FletX.Obx")
+        self._logger = get_logger("Obx")
         
         # Set up controller
         self.controller.set_builder(builder_fn)
@@ -203,7 +201,7 @@ class Obx:
     @property
     def logger(self):
         if not self._logger:
-            self._logger = get_logger('FletX.Obx')
+            self._logger = get_logger('Obx')
         return self._logger
     
     @property
@@ -228,7 +226,6 @@ class Obx:
             # Set the widget references in controller
             self.controller.set_uid(self._final_uid)
             self.controller.set_widget_ref(self.ref)
-
             
             self.logger.debug(f"Built widget: {type(self._widget).__name__} #{self._widget._id}")
         
@@ -280,7 +277,7 @@ class Obx:
         if hasattr(self._widget, 'dispose'):
             try:
                 self._widget.dispose()
-            except:
+            except:  # noqa: E722
                 pass
 
     def __getattr__(self, name):

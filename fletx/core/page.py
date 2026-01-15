@@ -7,7 +7,7 @@ enabling the creation of interactive and dynamic user experiences.
 
 import flet as ft
 from typing import (
-    Union, List, Optional, Any, Dict, Type, TypeVar, Callable, Tuple
+    Union, List, Optional, Any, Dict, Type, TypeVar, Callable
 )
 from abc import ABC, abstractmethod
 from fletx.core.controller import FletXController
@@ -65,7 +65,7 @@ class FletXPage(ft.Container, ABC):
         self.route_info: Optional[RouteInfo] = None
         self._controllers: Dict[str, FletXController] = {}
         self._effects = EffectManager()
-        self._logger = get_logger(f"FletX.Page.{self.__class__.__name__}")
+        self._logger = get_logger(f"FletXPage.{self.__class__.__name__}")
         self._state = PageState.INITIALIZING
         self._safe_area = safe_area
         self._auto_dispose_controllers = auto_dispose_controllers

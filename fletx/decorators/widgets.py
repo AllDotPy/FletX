@@ -9,9 +9,9 @@ import flet as ft
 from functools import wraps
 from typing import (
     Tuple, get_type_hints, Dict, Callable, Any,
-    Optional, Union, List, TypeVar
+    Optional, Union, List, TypeVar  # noqa: F401
 )
-from dataclasses import dataclass
+from dataclasses import dataclass  # noqa: F401
 from enum import Enum
 
 from fletx.core import (
@@ -169,7 +169,7 @@ def reactive_control(
         def _validate_reactive_attributes(self):
             """Validate that required reactive attributes exist"""
 
-            type_hints = get_type_hints(ControlClass)
+            type_hints = get_type_hints(ControlClass)  # noqa: F841
             
             for widget_prop, binding in bindings.items():
                 if isinstance(binding, str):

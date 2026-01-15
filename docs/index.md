@@ -55,6 +55,7 @@ FletX is built on 3 core principles:
 
 ## ⚡ Quick Example
 
+```python
 import flet as ft
 
 from fletx.app import FletXApp

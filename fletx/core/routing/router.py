@@ -7,10 +7,9 @@ Integrates with Flet's native navigation system (Page.route and Views).
 """
 
 import flet as ft
-from typing import Dict, Any, Optional, List, Union, Callable
+from typing import Dict, Any, Optional, List, Callable
 from urllib.parse import parse_qs, urlparse
 import asyncio
-from contextlib import asynccontextmanager
 
 from fletx.core.routing.models import (
     RouteInfo, NavigationIntent, RouterState, NavigationMode, 
@@ -73,7 +72,7 @@ class FletXRouter:
 
     @property
     def logger(cls):
-        return get_logger('FletX.Router')
+        return get_logger('FletXRouter')
     
     @classmethod
     def get_instance(cls) -> 'FletXRouter':
@@ -266,7 +265,7 @@ class FletXRouter:
         """Navigate back in history."""
 
         if not self.state.history:
-            self._logger.warning("No previous route in history")
+            self.logger.warning("No previous route in history")
             return False
         
         previous_route = self.state.history.pop()
@@ -282,7 +281,7 @@ class FletXRouter:
         """Navigate forward in history."""
 
         if not self.state.forward_stack:
-            self._logger.warning("No forward route in history")
+            self.logger.warning("No forward route in history")
             return False
         
         forward_route = self.state.forward_stack.pop()
@@ -327,11 +326,11 @@ class FletXRouter:
 
         self._global_middleware.append(middleware)
     
-    def set_navigation_mode(self, mode: NavigationMode):
+    def set_navigation_mode(self, mode: NavigationMode):  # noqa: F811
         """Set navigation mode for Flet integration."""
 
         self.state.navigation_mode = mode
-        self._logger.debug(f"Navigation mode set to: {mode}")
+        self.logger.debug(f"Navigation mode set to: {mode}")
     
     # @worker_task(priority = Priority.HIGH)
     async def _check_deactivation_guards(self) -> bool:
@@ -442,7 +441,7 @@ class FletXRouter:
                 else:
                     resolved_data[key] = resolver(route_info)
             except Exception as e:
-                self._logger.error(f"Data resolver failed for {key}: {e}")
+                self.logger.error(f"Data resolver failed for {key}: {e}")
         
         return resolved_data
     
@@ -538,7 +537,7 @@ class FletXRouter:
                 else:
                     component.did_mount()
             except Exception as e:
-                self._logger.error(f"did_mount() failed: {e}")
+                self.logger.error(f"did_mount() failed: {e}")
     
     def _get_default_transition(self, route_def) -> Optional[RouteTransition]:
         """Get default transition for route."""

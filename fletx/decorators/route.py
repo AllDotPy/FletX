@@ -6,7 +6,6 @@ their corresponding page handlers, enabling clear and concise routing
 definitions within the application.
 """
 
-from typing import Type, Callable
 from fletx.core.routing.config import (
     router_config, ModuleRouter
 )

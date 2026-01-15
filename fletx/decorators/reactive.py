@@ -6,7 +6,6 @@ tracking dependencies and updating components when underlying data changes,
 facilitating seamless UI updates.
 """
 
-import flet as ft
 import asyncio
 import time
 from typing import (
@@ -14,8 +13,6 @@ from typing import (
     List, Optional, Tuple, Set
 )
 from functools import wraps
-from weakref import WeakSet
-
 
 from fletx.core.state import (
     Reactive, ReactiveDependencyTracker, Computed,
@@ -73,14 +70,14 @@ def reactive_batch():
     ```python
     @reactive_batch()
     def batch_update(items: RxList):
-        # Multiple rapid changes will be batched together
+        # Multiple rapid changes will be batched
         update_list_display(items.value)
     ```
     """
     def decorator(func: F) -> F:
         @wraps(func)
         def wrapper(*args, **kwargs):
-            update_fn = lambda: func(*args, **kwargs)
+            update_fn = lambda: func(*args, **kwargs)  # noqa: E731
             _batch_manager.add_update(update_fn)
             logger.debug(f"Batched {func.__name__} for next tick")
         
@@ -167,7 +164,6 @@ def reactive_memo(
                 return result
             
             # Track dependencies during computation
-            from fletx.core import ReactiveDependencyTracker
             result, dependencies = ReactiveDependencyTracker.track(
                 lambda: func(*args, **kwargs)
             )
@@ -403,7 +399,6 @@ def reactive_effect(
         def wrapper(*args, **kwargs):
             # Auto-detect dependencies if not provided
             if dependencies is None:
-                from fletx.core import ReactiveDependencyTracker
                 result, deps = ReactiveDependencyTracker.track(
                     lambda: func(*args, **kwargs)
                 )
@@ -463,7 +458,6 @@ def reactive_computed(dependencies: Optional[List[Reactive]] = None):
     # full_name is now a Reactive[str] that updates automatically
     """
     def decorator(func: F) -> Reactive:
-        from fletx.core.state import Computed
         return Computed(func, dependencies)
     
     return decorator

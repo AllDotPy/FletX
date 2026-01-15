@@ -176,7 +176,7 @@ class VersionChecker:
     def _get_compatibility_requirements(self, fletx_version_str: str) -> Optional[Dict[str, str]]:
         """Get compatibility requirements for a FletX version."""
         # Normalize version string (remove pre-release identifiers for matrix lookup)
-        normalized_version = self._normalize_version_for_matrix(fletx_version_str)
+        normalized_version = self._normalize_version_for_matrix(fletx_version_str)  # noqa: F841
         
         # Find the best matching requirements
         for matrix_version, requirements in self.COMPATIBILITY_MATRIX.items():
@@ -200,7 +200,7 @@ class VersionChecker:
             # Check if major and minor versions match
             return (parsed_version.major == parsed_matrix.major and 
                     parsed_version.minor == parsed_matrix.minor)
-        except:
+        except:  # noqa: E722
             return False
     
     def _generate_compatibility_message(

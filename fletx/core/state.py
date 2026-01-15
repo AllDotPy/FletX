@@ -6,10 +6,9 @@ manage data and application states, inspired by the GetX library.
 
 import logging
 from typing import (
-    Any, Callable, ClassVar, List, Generic, TypeVar, Dict, Optional,
-    Set, Union
+    Callable, ClassVar, List, Generic, TypeVar, Dict,
+    Set
 )
-from abc import ABC, abstractmethod
 from fletx.utils import get_logger
 
 T = TypeVar('T')
@@ -157,6 +156,10 @@ class Reactive(Generic[T]):
             self._value = new_value
             self._notify_observers()
             self.logger.debug(f"Value changed: {old_value} → {new_value}")
+
+    def set(self, new_value: T):
+        """Sets a new value"""
+        self.value = new_value
     
     def listen(
         self, 

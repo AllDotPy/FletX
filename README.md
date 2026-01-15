@@ -55,7 +55,7 @@ Perfect for building **desktop, web, and mobile apps** with Python at lightning 
         Counter App
         <img src = "./screeshots/videos/counter.gif" width="400">
       </td>
-      <td rowspan="2">
+      <td rowspan="1">
         Reactive List
         <img src = "./screeshots/videos/reactive_list.gif" width="400">
       </td>
@@ -89,7 +89,7 @@ Perfect for building **desktop, web, and mobile apps** with Python at lightning 
 
 ### Installation
 ```bash
-pip install FletXr --pre
+pip install FletXr[dev] --pre
 ```
 
 ### Create project

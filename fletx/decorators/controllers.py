@@ -7,7 +7,7 @@ validation, security, etc. to controllers.
 """
 
 from fletx import FletX
-from typing import Type, Callable, Optional
+from typing import Type, Callable, Optional  # noqa: F401
 from functools import wraps
 from fletx.core.page import FletXPage
 from fletx.core.controller import FletXController

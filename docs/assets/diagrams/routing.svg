@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="220" viewBox="0 0 820 220">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="10" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,3 L0,6 Z" fill="#059669" />
+    </marker>
+    <style>
+      .box{fill:#ffffff;stroke:#1f2937;stroke-width:2;rx:8;ry:8}
+      .label{font-family:Inter,Arial,sans-serif;font-size:14px;fill:#111827}
+      .title{font-family:Inter,Arial,sans-serif;font-size:16px;font-weight:700;fill:#111827}
+    </style>
+  </defs>
+  <rect x="20" y="30" width="170" height="60" class="box"/>
+  <text x="105" y="55" text-anchor="middle" class="title">URL change</text>
+  <text x="105" y="75" text-anchor="middle" class="label">/user/42</text>
+
+  <rect x="230" y="30" width="180" height="60" class="box"/>
+  <text x="320" y="55" text-anchor="middle" class="title">Router</text>
+  <text x="320" y="75" text-anchor="middle" class="label">matches route</text>
+
+  <rect x="440" y="30" width="170" height="60" class="box"/>
+  <text x="525" y="55" text-anchor="middle" class="title">Create Page</text>
+  <text x="525" y="75" text-anchor="middle" class="label">UserPage</text>
+
+  <rect x="630" y="30" width="170" height="60" class="box"/>
+  <text x="715" y="55" text-anchor="middle" class="title">Attach Controller</text>
+  <text x="715" y="75" text-anchor="middle" class="label">UserController</text>
+
+  <rect x="230" y="120" width="570" height="60" class="box"/>
+  <text x="515" y="155" text-anchor="middle" class="title">build() → UI</text>
+
+  <line x1="190" y1="60" x2="230" y2="60" stroke="#059669" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="410" y1="60" x2="440" y2="60" stroke="#059669" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="610" y1="60" x2="630" y2="60" stroke="#059669" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="715" y1="90" x2="715" y2="120" stroke="#059669" stroke-width="3" marker-end="url(#arrow)"/>
+</svg>
+
+

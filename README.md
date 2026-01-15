@@ -55,7 +55,7 @@ Perfect for building **desktop, web, and mobile apps** with Python at lightning 
         Counter App
         <img src = "./screeshots/videos/counter.gif" width="400">
       </td>
-      <td rowspan="1">
+      <td rowspan="2">
         Reactive List
         <img src = "./screeshots/videos/reactive_list.gif" width="400">
       </td>

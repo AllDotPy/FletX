@@ -30,18 +30,18 @@ Perfect for building **desktop, web, and mobile apps** with Python at lightning 
   <table>
     <tr>
       <td>
-        Counter App
-        <img src = "https://github.com/AllDotPy/FletX/blob/master/screeshots/videos/counter.gif?raw=true" width="400">
+        web
+        <img src = "https://github.com/AllDotPy/FletX/blob/master/screeshots/videos/web.gif?raw=true" width="400">
       </td>
       <td rowspan="2">
-        Todo App
-        <img src = "https://github.com/AllDotPy/FletX/blob/master/screeshots/videos/reactive_list.gif?raw=true" width="300">
+        Mobile
+        <img src = "https://github.com/AllDotPy/FletX/blob/master/screeshots/videos/mobile.gif?raw=true" width="300">
       </td>
     </tr>
     <tr >
       <td>
-        Reactive Forms
-        <img src = "https://github.com/AllDotPy/FletX/blob/master/screeshots/videos/reactive_forms.gif?raw=true" width="400">
+        Desktop
+        <img src = "https://github.com/AllDotPy/FletX/blob/master/screeshots/videos/desktop.gif?raw=true" width="400">
       </td>
     </tr>
   </table>

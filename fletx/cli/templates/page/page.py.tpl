@@ -16,7 +16,7 @@ class {{ name | pascal_case }}Page(FletXPage):
     def __init__(self):
         super().__init__(
             padding = 10,
-            bgcolor = Colors.BLACK
+            bgcolor = Theme.scaffold_bgcolor
         )
 
         # ...
@@ -34,11 +34,16 @@ class {{ name | pascal_case }}Page(FletXPage):
     def build(self)-> Control:
         """Method that build {{ name | pascal_case }}Page content"""
 
-        return Column(
+        return SafeArea(
             expand = True,
-            alignment = MainAxisAlignment.CENTER,
-            horizontal_alignment = CrossAxisAlignment.CENTER,
-            controls = [
-                Text("{{ name | pascal_case }}Page works!", size=24),
-            ]
+            minimum_padding = 0,
+            maintain_bottom_view_padding = False,
+            content = Column(
+                expand = True,
+                alignment = MainAxisAlignment.CENTER,
+                horizontal_alignment = CrossAxisAlignment.CENTER,
+                controls = [
+                    Text("{{ name | pascal_case }}Page works!", size=24),
+                ]
+            )
         )

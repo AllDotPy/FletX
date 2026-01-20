@@ -52,18 +52,18 @@ Perfect for building **desktop, web, and mobile apps** with Python at lightning 
   <table>
     <tr>
       <td>
-        Counter App
-        <img src = "./screeshots/videos/counter.gif" width="400">
+        Web
+        <img src = "./screeshots/videos/web.gif" width="400">
       </td>
       <td rowspan="2">
         Reactive List
-        <img src = "./screeshots/videos/reactive_list.gif" width="400">
+        <img src = "./screeshots/videos/mobile.gif" width="300">
       </td>
     </tr>
     <tr >
       <td>
-        Reactive Forms
-        <img src = "./screeshots/videos/reactive_forms.gif" width="400">
+        Desktop
+        <img src = "./screeshots/videos/desktop.gif" width="400">
       </td>
     </tr>
   </table>

@@ -56,7 +56,7 @@ Perfect for building **desktop, web, and mobile apps** with Python at lightning 
         <img src = "./screeshots/videos/web.gif" width="400">
       </td>
       <td rowspan="2">
-        Reactive List
+        Mobile
         <img src = "./screeshots/videos/mobile.gif" width="300">
       </td>
     </tr>

@@ -48,8 +48,10 @@ class CounterPage(FletXPage):
                                     weight = ft.FontWeight.BOLD
                                 )
                             ),
-                            ft.ElevatedButton(
-                                "Increment",
+                            ft.CupertinoFilledButton(
+                                content=ft.Text("Increment"),s
+                                opacity_on_click=0.7,
+                                padding=10,
                                 on_click=lambda e: self.ctrl.count.increment()  # Auto UI update
                             )
                         ]

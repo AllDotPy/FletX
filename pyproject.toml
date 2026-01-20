@@ -1,6 +1,6 @@
 [project]
 name = "FletXr"
-version = "0.1.4"
+version = "0.1.4.b4"
 description = "The GetX-inspired Python Framework for Building Reactive, Cross-Platform Apps with Flet"
 readme = "PYPI.md"
 license = {file = "LICENSE"}
@@ -16,6 +16,7 @@ dependencies = [
     "pydantic>=2.11.5",
     "packaging>=21.0",
     "flet==0.28.3",
+    "requests>=2.31.0",     # For packaging
 ]
 
 [project.scripts]

@@ -52,7 +52,7 @@ Perfect for building **desktop, web, and mobile apps** with Python at lightning 
   <table>
     <tr>
       <td>
-        Web
+        Web <br>
         <img src = "./screeshots/videos/web.gif" width="400">
       </td>
       <td rowspan="2">

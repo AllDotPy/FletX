@@ -123,7 +123,8 @@ fletx run --web # Will open app in a navigator
         # --desktop to open app in a desktop window
         # --android to open app on Android device
         # --ios to open app on a iOs device
-        # --help for more option
+        # --watch for hot reload
+        # --help for more options
 ```
 
 ## Running Tests with FletX CLI

@@ -1,6 +1,6 @@
 [project]
 name = "FletXr"
-version = "0.1.4.b4"
+version = "0.1.4c"
 description = "The GetX-inspired Python Framework for Building Reactive, Cross-Platform Apps with Flet"
 readme = "PYPI.md"
 license = {file = "LICENSE"}

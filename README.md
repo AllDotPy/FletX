@@ -80,8 +80,9 @@ Perfect for building **desktop, web, and mobile apps** with Python at lightning 
 <img src = "./screeshots/videos/reactive_forms.gif" width="400"> -->
 
 ---
-## Architecture
-<img src = "architecture.svg">
+<!-- ## Architecture
+<img src = "architecture.svg"> -->
+
 
 ## Quick Start 🏁
 
@@ -362,6 +363,9 @@ We welcome contributions from the community! Please see the [CONTRIBUTING.md](CO
 ## License 📜
 
 MIT © 2025 AllDotPy
+
+## Star History 🌟
+[![star History Chart](https://api.star-history.com/svg?repos=AllDotPy/FletX&type=Date)](https://api.star-history.com/svg?repos=AllDotPy/FletX&type=Date)
 
 ```bash
 # Happy coding! 

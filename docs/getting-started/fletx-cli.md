@@ -66,7 +66,7 @@ Generate a component for your project.
 fletx generate <type> <name> [options]
 ```
 
-where `<type>` can be: `controller`, `service`, `model`, `component`, `page`
+where `<type>` can be: `controller`, `service`, `component`, `page`, `middleware`, `guard`
 
 ### Options
 

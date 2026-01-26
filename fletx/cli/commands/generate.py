@@ -3,7 +3,6 @@ Command to generate FletX components (controllers, views, services, etc.).
 """
 
 from pathlib import Path
-from typing import Optional
 
 from fletx.cli.commands import TemplateCommand, CommandParser
 from fletx.utils.exceptions import CommandExecutionError
@@ -20,7 +19,7 @@ class ComponentCommand(TemplateCommand):
         """Add arguments specific to the component command."""
         parser.add_argument(
             "type",
-            choices=["controller", "service", "model", "component", "page", "middleware", "guard"],
+            choices=["controller", "service", "component", "page", "middleware", "guard"],
             help="Type of component to generate"
         )
         parser.add_argument(
@@ -137,7 +136,7 @@ class ComponentCommand(TemplateCommand):
         template_mapping = {
             "controller": "controller",
             "service": "service",
-            "model": "model",
+            # "model": "model",
             "component": "component",
             "page": "page",
             "middleware": "middleware",
@@ -153,7 +152,7 @@ class ComponentCommand(TemplateCommand):
         dir_mapping = {
             "controller": "app/controllers",
             "service": "app/services", 
-            "model": "app/models",
+            # "model": "app/models",
             "component": "app/components",
             "page": "app/pages",
             "middleware": "app/middlewares",
@@ -242,48 +241,48 @@ class ComponentCommand(TemplateCommand):
             "controller": [
                 f"1. Your controller is located at: {target_dir}/{name.lower()}_controller.py",
                 f"2. Add your business logic in the {name}Controller class",
-                f"3. Use dependency injection to access services",
-                f"4. Register the controller in your bindings if needed"
+                "3. Use dependency injection to access services",
+                "4. Register the controller in your bindings if needed"
             ],
             "service": [
                 f"1. Your service is located at: {target_dir}/{name.lower()}_service.py",
                 f"2. Implement your business logic in the {name}Service class",
-                f"3. Register the service in your bindings",
-                f"4. Inject the service into controllers that need it"
+                "3. Register the service in your bindings",
+                "4. Inject the service into controllers that need it"
             ],
             "model": [
                 f"1. Your model is located at: {target_dir}/{name.lower()}_model.py",
                 f"2. Define your data structure in the {name}Model class",
-                f"3. Add validation and serialization methods as needed",
-                f"4. Use the model in your controllers and services"
+                "3. Add validation and serialization methods as needed",
+                "4. Use the model in your controllers and services"
             ],
             "component": [
                 f"1. Your widget is located at: {target_dir}/{name.lower()}_component.py",
                 f"2. Implement your custom widget in the {name}Widget class",
-                f"3. Use the widget in your views and pages",
-                f"4. Make it reusable by parameterizing it properly"
+                "3. Use the widget in your views and pages",
+                "4. Make it reusable by parameterizing it properly"
             ],
             "page": [
                 f"1. Your page is located at: {target_dir}/{name.lower()}_page.py",
                 f"2. Define your page layout in the {name}Page class",
-                f"3. Add the page to your route configuration",
-                f"4. Connect to controllers for business logic"
+                "3. Add the page to your route configuration",
+                "4. Connect to controllers for business logic"
             ]
         }
         
         component_instructions = instructions.get(component_type, [
             f"1. Your component is located at: {target_dir}",
             f"2. Customize the {name} class as needed",
-            f"3. Follow FletX patterns and conventions"
+            "3. Follow FletX patterns and conventions"
         ])
         
         for instruction in component_instructions:
             print(f"  {instruction}")
         
-        print(f"\nNext steps:")
-        print(f"  • Edit the generated files to implement your logic")
-        print(f"  • Run your application with: fletx run")
-        print(f"  • Check the documentation for best practices")
+        print("\nNext steps:")
+        print("  • Edit the generated files to implement your logic")
+        print("  • Run your application with: fletx run")
+        print("  • Check the documentation for best practices")
     
     def get_missing_args_message(self) -> str:
         """Get the missing arguments message."""

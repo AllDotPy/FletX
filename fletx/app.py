@@ -2,12 +2,11 @@
 FletX main entry point
 """
 
-import asyncio
 import inspect
-import sys, signal, atexit
+import atexit
 import flet as ft
 from typing import (
-    Dict, Type, Optional, Callable, Any, Union, List
+    Dict, Optional, Callable, Any, Union, List
 )
 
 from fletx.core.routing.models import NavigationMode
@@ -15,7 +14,7 @@ from fletx.core.routing.router import FletXRouter
 # from fletx.core.factory import FletXWidgetRegistry
 from fletx.utils.logger import SharedLogger
 from fletx.utils.context import AppContext
-from fletx.utils import run_async
+from fletx.utils import run_async  # noqa: F401
 from fletx.core.concurency.event_loop import EventLoopManager
 
 
@@ -289,7 +288,7 @@ class FletXApp:
         merged_kwargs = {**self.flet_kwargs, **kwargs}
         ft.app(target=self._sync_main, **merged_kwargs)
 
-    def run_async(self, **kwargs):
+    def run_async(self, **kwargs):  # noqa: F811
         """Run the application (async mode)"""
 
         def async_wrapper(page):

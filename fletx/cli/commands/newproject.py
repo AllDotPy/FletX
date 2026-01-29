@@ -4,16 +4,15 @@ Command to create new FletX projects.
 
 import os
 from pathlib import Path
-from typing import Optional
 
 from fletx.cli.commands import (
     TemplateCommand, CommandParser
 )
 from fletx.utils.exceptions import (
-    CommandExecutionError, ProjectError
+    CommandExecutionError, #ProjectError
 )
 from fletx.cli.templates import (
-    TemplateManager, TemplateValidator
+    TemplateManager, #TemplateValidator
 )
 from fletx import __version__
 
@@ -31,11 +30,13 @@ class NewProjectCommand(TemplateCommand):
             help="Name of the new project"
         )
         parser.add_argument(
+            "-t",
             "--template",
             default="project",
             help="Template to use for the project (default: project)"
         )
         parser.add_argument(
+            "-D",
             "--directory",
             help="Directory where the project should be created (default: current directory)"
         )
@@ -44,10 +45,12 @@ class NewProjectCommand(TemplateCommand):
             help="Author name for the project"
         )
         parser.add_argument(
+            "-d",
             "--description",
             help="Project description"
         )
         parser.add_argument(
+            "-v",
             "--version",
             default="0.1.0",
             help="Initial project version (default: 0.1.0)"
@@ -58,11 +61,13 @@ class NewProjectCommand(TemplateCommand):
             help="Minimum Python version required (default: 3.12)"
         )
         parser.add_argument(
+            "-W",
             "--overwrite",
             action="store_true",
             help="Overwrite existing files if they exist"
         )
         parser.add_argument(
+            "-N",
             "--no-install",
             action="store_true",
             help="Don't install dependencies after creating the project"
@@ -196,19 +201,19 @@ class NewProjectCommand(TemplateCommand):
     ) -> None:
         """Print next steps for the user."""
 
-        print(f"\n{'='*50}")
+        print("\n{'='*50}")
         print("🎉 Project created successfully!")
-        print(f"{'='*50}")
-        print(f"\nNext steps:")
-        print(f"  1. cd {project_dir.name}")
+        print("{'='*50}")
+        print("\nNext steps:")
+        print("  1. cd {project_dir.name}")
         
         if no_install:
-            print(f"  2. pip install -r requirements.txt")
-            print(f"  3. fletx run")
+            print("  2. pip install -r requirements.txt")
+            print("  3. fletx run")
         else:
-            print(f"  2. fletx run")
+            print("  2. fletx run")
         
-        print(f"\nProject structure:")
+        print("\nProject structure:")
         self._print_project_structure(project_dir)
     
     def _print_project_structure(

@@ -3,13 +3,9 @@ Command to check version compatibility between FletX and Flet.
 """
 
 import sys
-from typing import Optional
 
 from fletx.cli.commands import (
     BaseCommand, CommandParser
-)
-from fletx.utils.exceptions import (
-    CommandExecutionError
 )
 from fletx.utils.version_checker import (
     VersionChecker, CompatibilityResult
@@ -100,14 +96,14 @@ class CheckCommand(BaseCommand):
         
         # Version details (if not quiet)
         if not quiet:
-            print(f"\nVersion Details:")
+            print("\nVersion Details:")
             print(f"   FletX: {result.fletx_version.version_str}")
             print(f"   Flet:  {result.flet_version.version_str}")
             
             try:
                 python_version = VersionChecker().get_python_version()
                 print(f"   Python: {python_version.version_str}")
-            except:
+            except:  # noqa: E722
                 pass
     
     def _output_json(self, result: CompatibilityResult) -> None:
@@ -125,7 +121,7 @@ class CheckCommand(BaseCommand):
         try:
             python_version = VersionChecker().get_python_version()
             output["python_version"] = python_version.version_str
-        except:
+        except:  # noqa: E722
             output["python_version"] = "unknown"
         
         print(json.dumps(output, indent=2))

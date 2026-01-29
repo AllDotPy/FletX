@@ -12,7 +12,7 @@ from fletx.cli.commands import (
     BaseCommand, CommandParser
 )
 from fletx.utils.exceptions import (
-    CommandExecutionError, ProjectError
+    CommandExecutionError, # ProjectError
 )
 
 
@@ -31,11 +31,13 @@ class RunCommand(BaseCommand):
             help = "Python file to run (default: main.py)"
         )
         parser.add_argument(
+            "-h",
             "--host",
             default = "localhost",
             help = "Host to bind to (default: localhost)"
         )
         parser.add_argument(
+            "-p",
             "--port",
             type = int,
             default = 8550,
@@ -47,26 +49,31 @@ class RunCommand(BaseCommand):
             help = "Run in debug mode"
         )
         parser.add_argument(
+            "-W",
             "--watch",
             action = "store_true",
             help = "Enable recursive script directory watch for hot reload in development"
         )
         parser.add_argument(
+            "-w",
             "--web",
             action = "store_true",
             help = "Open app in a web browser"
         )
         parser.add_argument(
+            "-d",
             "--desktop",
             action = "store_true",
             help = "Force desktop mode"
         )
         parser.add_argument(
+            "-A",
             "--android",
             action = "store_true",
             help = "Open app on Android divice"
         )
         parser.add_argument(
+            "-X",
             "--ios",
             action = "store_true",
             help = "Open app on iOS divice"
@@ -80,11 +87,13 @@ class RunCommand(BaseCommand):
             help = "Path to upload directory"
         )
         parser.add_argument(
+            "-e",
             "--env",
             action = "append",
             help = "Environment variables in KEY=VALUE format"
         )
         parser.add_argument(
+            "-r",
             "--requirements",
             help = "Path to requirements.txt file"
         )
@@ -94,6 +103,7 @@ class RunCommand(BaseCommand):
             help = "Install dependencies before running"
         )
         parser.add_argument(
+            "-v",
             "--verbose",
             action = "store_true",
             help = "Verbose output"
@@ -338,7 +348,7 @@ class RunCommand(BaseCommand):
             print(f"Working directory: {Path.cwd()}")
         
         try:
-            print(f"Starting FletX application...")
+            print("Starting FletX application...")
             print(f"Target: {cmd_args[1]}")
             print("\nPress Ctrl+C to stop the application.")
             print("-" * 50)

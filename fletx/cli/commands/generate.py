@@ -27,14 +27,17 @@ class ComponentCommand(TemplateCommand):
             help="Name of the component"
         )
         parser.add_argument(
+            "-O",
             "--output-dir",
             help="Directory where the component should be created (default: based on type)"
         )
         parser.add_argument(
-            "--template",
+            "-t",
+            "--template", 
             help="Specific template to use (default: based on component type)"
         )
         parser.add_argument(
+            "-W",
             "--overwrite",
             action="store_true",
             help="Overwrite existing files if they exist"

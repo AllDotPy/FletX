@@ -2,9 +2,9 @@ from argparse import (
     Namespace, ArgumentParser
 )
 from functools import partial
-from abc import ABC, abstractmethod
+from abc import ABC
 from importlib.util import find_spec
-from typing import Any, ClassVar, Dict, Type, List
+from typing import ClassVar, Dict, Type, List
 
 from fletx.utils.exceptions import (
     CommandError, CommandExecutionError,

@@ -4,6 +4,16 @@
 
 ---
 
+!!! tip "How to read reactivity diagrams"
+
+    - Boxes are **state holders** (Rx) or **consumers** (widgets/controllers).
+
+    - Arrows show **state change propagation**.
+
+    - Use the Architecture guide’s reactivity figure as a companion visual.
+
+[← Back to Architecture](architecture.md)
+
 ### 🔄 Why reactivity matters
 
 In most frameworks, when a value changes (e.g. a user logs in), you need to manually update the UI, synchronize the state, or refresh components.

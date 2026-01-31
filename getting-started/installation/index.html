@@ -1,0 +1,1867 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://your-docs-url.com/getting-started/installation/">
+      
+      
+        <link rel="prev" href="../..">
+      
+      
+        <link rel="next" href="../fletx-cli/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/logo/fletx.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
+    
+    
+      
+        <title>Introduction - FletX Framework</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter:300,300i,400,400i,700,700i%7CChivo+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Inter";--md-code-font:"Chivo Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/msdl.v2.css">
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/theme.v3.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="light-blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#introduction" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="FletX Framework" class="md-header__button md-logo" aria-label="FletX Framework" data-md-component="logo">
+      
+  <img src="../../assets/logo/fletx.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            FletX Framework
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Introduction
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="light-blue"  aria-hidden="true"  type="radio" name="__palette" id="__palette_0">
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/AllDotPy/FletX" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    FletX
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../api-reference/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  API Reference
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../contributing/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Contributing
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="FletX Framework" class="md-nav__button md-logo" aria-label="FletX Framework" data-md-component="logo">
+      
+  <img src="../../assets/logo/fletx.png" alt="logo">
+
+    </a>
+    FletX Framework
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/AllDotPy/FletX" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    FletX
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+      
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting Started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Introduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-fletx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is FletX?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What is FletX?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fletx-vs-flet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FletX vs Flet
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Installation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-install-fletx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Install FletX
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-verify-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Verify Installation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-your-first-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Creating Your First App
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Creating Your First App">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#option-1-quick-start-with-cli-recommended" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option 1: Quick Start with CLI (Recommended)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-2-manual-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option 2: Manual Setup
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#understanding-the-app-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Understanding the App Structure
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#your-first-real-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Your First Real App
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Your First Real App">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-define-the-data-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Define the Data Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-create-a-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Create a Service
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-create-a-controller" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Create a Controller
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-create-a-page" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Create a Page
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-5-register-the-route" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 5: Register the Route
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-6-run-the-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 6: Run the App
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-the-fletx-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using the FletX CLI
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Next Steps
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fletx-cli/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FletX CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../architecture/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../state-management/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    State Management
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../controllers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Controllers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pages (views)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../routing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Routing System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dependency-injection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dependency Injection
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Services
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api-reference/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../contributing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contributing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-fletx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What is FletX?
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="What is FletX?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fletx-vs-flet" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FletX vs Flet
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Prerequisites
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Installation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-install-fletx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Install FletX
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-verify-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Verify Installation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creating-your-first-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Creating Your First App
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Creating Your First App">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#option-1-quick-start-with-cli-recommended" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option 1: Quick Start with CLI (Recommended)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#option-2-manual-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Option 2: Manual Setup
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#understanding-the-app-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Understanding the App Structure
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#your-first-real-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Your First Real App
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Your First Real App">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#step-1-define-the-data-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Define the Data Model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-2-create-a-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Create a Service
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-3-create-a-controller" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Create a Controller
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-4-create-a-page" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Create a Page
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-5-register-the-route" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 5: Register the Route
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#step-6-run-the-app" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 6: Run the App
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-the-fletx-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Using the FletX CLI
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Next Steps
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="./" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Getting Started
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/AllDotPy/FletX/edit/master/docs/getting-started/installation.md" title="Edit this page" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/AllDotPy/FletX/raw/master/docs/getting-started/installation.md" title="View source of this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.2 8.2 0 0 1-1.23-2"/></svg>
+    </a>
+  
+
+
+<h1 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h1>
+<blockquote>
+<p><strong>TL;DR</strong>: Install FletX with <code>pip install fletxr[dev]</code>, create your first app in 5 minutes with <code>fletx new my_app</code>, run it with <code>fletx run</code>, and you're building! FletX is a framework for building reactive, modular desktop and web apps with Flet.</p>
+</blockquote>
+<hr />
+<h2 id="what-is-fletx">What is FletX?<a class="headerlink" href="#what-is-fletx" title="Permanent link">&para;</a></h2>
+<p>FletX is a <strong>reactive application framework</strong> built on top of <a href="https://flet.dev">Flet</a>. It brings modern app architecture patterns (dependency injection, routing, state management, controllers) to Flet applications.</p>
+<h3 id="fletx-vs-flet">FletX vs Flet<a class="headerlink" href="#fletx-vs-flet" title="Permanent link">&para;</a></h3>
+<p><strong>Flet</strong> gives you widgets and basic page routing. You write everything in one place:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Pure Flet - manual, scattered logic</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">flet</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ft</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">page</span><span class="p">:</span> <span class="n">ft</span><span class="o">.</span><span class="n">Page</span><span class="p">):</span>
+    <span class="n">page</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Counter&quot;</span>
+
+    <span class="n">counter</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>  <span class="c1"># State scattered everywhere</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">increment</span><span class="p">(</span><span class="n">_</span><span class="p">):</span>
+        <span class="n">counter</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">text</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">counter</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
+        <span class="n">page</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+
+    <span class="n">text</span> <span class="o">=</span> <span class="n">ft</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="n">counter</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
+    <span class="n">page</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">ft</span><span class="o">.</span><span class="n">ElevatedButton</span><span class="p">(</span><span class="s2">&quot;Increment&quot;</span><span class="p">,</span> <span class="n">on_click</span><span class="o">=</span><span class="n">increment</span><span class="p">))</span>
+
+<span class="n">ft</span><span class="o">.</span><span class="n">app</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">main</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>FletX</strong> organizes your app with controllers, routing, DI, and reactive state:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># FletX - organized, reactive, scalable</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fletx</span><span class="w"> </span><span class="kn">import</span> <span class="n">FletXApp</span><span class="p">,</span> <span class="n">FletXPage</span><span class="p">,</span> <span class="n">FletXController</span><span class="p">,</span> <span class="n">RxInt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fletx.navigation</span><span class="w"> </span><span class="kn">import</span> <span class="n">router_config</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fletx.decorators</span><span class="w"> </span><span class="kn">import</span> <span class="n">obx</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">flet</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ft</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">CounterController</span><span class="p">(</span><span class="n">FletXController</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="n">RxInt</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">CounterPage</span><span class="p">(</span><span class="n">FletXPage</span><span class="p">):</span>
+    <span class="n">ctrl</span> <span class="o">=</span> <span class="n">CounterController</span><span class="p">()</span>
+
+    <span class="nd">@obx</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">ft</span><span class="o">.</span><span class="n">Column</span><span class="p">([</span>
+            <span class="n">ft</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Count: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">ctrl</span><span class="o">.</span><span class="n">count</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">),</span>
+            <span class="n">ft</span><span class="o">.</span><span class="n">ElevatedButton</span><span class="p">(</span><span class="s2">&quot;Increment&quot;</span><span class="p">,</span> <span class="n">on_click</span><span class="o">=</span><span class="k">lambda</span> <span class="n">_</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">ctrl</span><span class="o">.</span><span class="n">count</span><span class="o">.</span><span class="n">increment</span><span class="p">())</span>
+        <span class="p">])</span>
+
+<span class="n">router_config</span><span class="o">.</span><span class="n">add_route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">CounterPage</span><span class="p">)</span>
+<span class="n">app</span> <span class="o">=</span> <span class="n">FletXApp</span><span class="p">()</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</code></pre></div>
+<p><strong>Why FletX?</strong></p>
+<ul>
+<li>✅ Organized structure - no spaghetti code</li>
+<li>✅ Reactive UI - UI updates automatically when state changes</li>
+<li>✅ Scalable - works for small apps and large projects</li>
+<li>✅ Developer experience - CLI, generators, best practices built-in</li>
+</ul>
+<hr />
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<p>Before installing FletX, make sure you have:</p>
+<ul>
+<li><strong>Python &gt;=3.10,&lt;=3.13</strong> (<a href="https://www.python.org/downloads/">download here</a>)</li>
+<li><strong>A package manager</strong>: </li>
+<li><code>pip</code> (comes with Python)</li>
+<li><code>uv</code> (recommended, faster): <code>pip install uv</code></li>
+</ul>
+<p>Check your Python version:</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>--version
+</code></pre></div>
+<hr />
+<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
+<h3 id="step-1-install-fletx">Step 1: Install FletX<a class="headerlink" href="#step-1-install-fletx" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>fletxr<span class="o">[</span>dev<span class="o">]</span>
+</code></pre></div>
+<blockquote>
+<p>✅ This installs both Flet and FletX. The <code>[dev]</code> extras include development tools.</p>
+<p>💡 Using <code>uv</code>? Run: <code>uv pip install fletxr[dev]</code></p>
+</blockquote>
+<h3 id="step-2-verify-installation">Step 2: Verify Installation<a class="headerlink" href="#step-2-verify-installation" title="Permanent link">&para;</a></h3>
+<p>Test that everything works:</p>
+<div class="highlight"><pre><span></span><code>fletx<span class="w"> </span>--version
+</code></pre></div>
+<p>You should see the FletX version number.</p>
+<hr />
+<h2 id="creating-your-first-app">Creating Your First App<a class="headerlink" href="#creating-your-first-app" title="Permanent link">&para;</a></h2>
+<p>You have two options: <strong>Quick start with CLI</strong> (recommended) or <strong>manual setup</strong>.</p>
+<h3 id="option-1-quick-start-with-cli-recommended">Option 1: Quick Start with CLI (Recommended)<a class="headerlink" href="#option-1-quick-start-with-cli-recommended" title="Permanent link">&para;</a></h3>
+<p>The FletX CLI creates a complete project structure for you:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Create a new project</span>
+fletx<span class="w"> </span>new<span class="w"> </span>my_counter_app
+
+<span class="c1"># Navigate into it</span>
+<span class="nb">cd</span><span class="w"> </span>my_counter_app
+
+<span class="c1"># Run it</span>
+fletx<span class="w"> </span>run
+</code></pre></div>
+<p>That's it! Your app is running. The CLI sets up:
+- Project structure
+- Example pages and controllers
+- Routing configuration
+- Build configuration</p>
+<div align="center">
+  <table>
+    <tr>
+      <td>
+        web
+        <img src = "https://github.com/AllDotPy/FletX/blob/master/screeshots/videos/web.gif?raw=true" width="400">
+      </td>
+      <td rowspan="2">
+        Mobile
+        <img src = "https://github.com/AllDotPy/FletX/blob/master/screeshots/videos/mobile.gif?raw=true" width="300">
+      </td>
+    </tr>
+    <tr >
+      <td>
+        Desktop
+        <img src = "https://github.com/AllDotPy/FletX/blob/master/screeshots/videos/desktop.gif?raw=true" width="400">
+      </td>
+    </tr>
+  </table>
+</div>
+
+<h3 id="option-2-manual-setup">Option 2: Manual Setup<a class="headerlink" href="#option-2-manual-setup" title="Permanent link">&para;</a></h3>
+<p>Create a <code>main.py</code> file:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">flet</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ft</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fletx</span><span class="w"> </span><span class="kn">import</span> <span class="n">FletXApp</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fletx.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">FletXPage</span><span class="p">,</span> <span class="n">FletXController</span><span class="p">,</span> <span class="n">RxInt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fletx.navigation</span><span class="w"> </span><span class="kn">import</span> <span class="n">router_config</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fletx.decorators</span><span class="w"> </span><span class="kn">import</span> <span class="n">obx</span>
+
+<span class="c1"># Step 1: Create a controller to manage state</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">CounterController</span><span class="p">(</span><span class="n">FletXController</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="n">RxInt</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Step 2: Create a page that uses the controller</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">CounterPage</span><span class="p">(</span><span class="n">FletXPage</span><span class="p">):</span>
+    <span class="n">ctrl</span> <span class="o">=</span> <span class="n">CounterController</span><span class="p">()</span>
+
+    <span class="c1"># @obx makes this widget reactive - it rebuilds when count changes</span>
+    <span class="nd">@obx</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">counter_text</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">ft</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;Count: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">ctrl</span><span class="o">.</span><span class="n">count</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+            <span class="n">size</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span> 
+            <span class="n">weight</span> <span class="o">=</span> <span class="s2">&quot;bold&quot;</span><span class="p">,</span>
+            <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span> <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">ctrl</span><span class="o">.</span><span class="n">count</span><span class="o">.</span><span class="n">value</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="s1">&#39;white&#39;</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">ft</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span>
+            <span class="n">controls</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">counter_text</span><span class="p">(),</span>
+                <span class="n">ft</span><span class="o">.</span><span class="n">ElevatedButton</span><span class="p">(</span>
+                    <span class="s2">&quot;Increment&quot;</span><span class="p">,</span>
+                    <span class="n">on_click</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">e</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">ctrl</span><span class="o">.</span><span class="n">count</span><span class="o">.</span><span class="n">increment</span><span class="p">()</span>  <span class="c1"># Auto UI update</span>
+                <span class="p">)</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+
+<span class="c1"># Step 3: Register the route</span>
+<span class="n">router_config</span><span class="o">.</span><span class="n">add_route</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="n">component</span><span class="o">=</span><span class="n">CounterPage</span><span class="p">)</span>
+
+<span class="c1"># Step 4: Create and run the app</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">FletXApp</span><span class="p">(</span>
+        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;My First FletX App&quot;</span><span class="p">,</span>
+        <span class="n">initial_route</span><span class="o">=</span><span class="s2">&quot;/&quot;</span>
+    <span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</code></pre></div>
+<p>Run it:</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>main.py
+</code></pre></div>
+<p>Desktop
+<img src = "https://github.com/AllDotPy/FletX/blob/master/screeshots/videos/obx.gif?raw=true" width="400"></p>
+<hr />
+<h2 id="understanding-the-app-structure">Understanding the App Structure<a class="headerlink" href="#understanding-the-app-structure" title="Permanent link">&para;</a></h2>
+<p>When you create an app with <code>fletx new</code>, you get this structure:</p>
+<div class="highlight"><pre><span></span><code>my_app/
+├── app/
+│   ├── __init__.py
+│   ├── controllers/          # Controllers manage state and logic
+│   │   └── counter_ctrl.py
+│   ├── pages/                # UI pages (what users see)
+│   │   ├── home_page.py
+│   │   └── settings_page.py
+│   ├── services/             # Business logic (API, database, etc.)
+│   │   ├── __init__.py
+│   │   └── auth_service.py
+│   ├── components/           # Reusable widgets
+│   │   ├── __init__.py
+│   │   └── navigation_bar.py
+│   ├── models/               # Data structures
+│   │   ├── __init__.py
+│   │   └── user_model.py
+│   └── routes.py             # All routes defined here
+├── assets/                   # Images, fonts, static files
+│   ├── images/
+│   └── fonts/
+├── tests/                    # Unit and integration tests
+├── main.py                   # Application entry point
+├── pyproject.toml            # Python dependencies and metadata
+├── .python-version           # Python version specification
+└── README.md                 # Project documentation
+</code></pre></div>
+<p><strong>Key directories:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Directory</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>controllers/</code></td>
+<td>Manage app state using reactive variables (<code>RxInt</code>, <code>RxStr</code>, etc.)</td>
+</tr>
+<tr>
+<td><code>pages/</code></td>
+<td>Define UI pages using <code>FletXPage</code></td>
+</tr>
+<tr>
+<td><code>services/</code></td>
+<td>Shared business logic (database, API calls, authentication)</td>
+</tr>
+<tr>
+<td><code>components/</code></td>
+<td>Reusable UI widgets you build from Flet controls</td>
+</tr>
+<tr>
+<td><code>models/</code></td>
+<td>Data classes and structures</td>
+</tr>
+<tr>
+<td><code>routes.py</code></td>
+<td>Define all app routes in one place</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="your-first-real-app">Your First Real App<a class="headerlink" href="#your-first-real-app" title="Permanent link">&para;</a></h2>
+<p>Let's create a simple todo app to understand the structure:</p>
+<h3 id="step-1-define-the-data-model">Step 1: Define the Data Model<a class="headerlink" href="#step-1-define-the-data-model" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># app/models/todo.py</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Todo</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">completed</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="n">title</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">completed</span> <span class="o">=</span> <span class="n">completed</span>
+</code></pre></div>
+<h3 id="step-2-create-a-service">Step 2: Create a Service<a class="headerlink" href="#step-2-create-a-service" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># app/services/todo_service.py</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">app.models.todo</span><span class="w"> </span><span class="kn">import</span> <span class="n">Todo</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TodoService</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">todos</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">next_id</span> <span class="o">=</span> <span class="mi">1</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_todo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">todo</span> <span class="o">=</span> <span class="n">Todo</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">next_id</span><span class="p">,</span> <span class="n">title</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">todos</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">todo</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">next_id</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">todo</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_todos</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">todos</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">toggle_todo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">todo_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">todo</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">todos</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">todo</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">todo_id</span><span class="p">:</span>
+                <span class="n">todo</span><span class="o">.</span><span class="n">completed</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">todo</span><span class="o">.</span><span class="n">completed</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">delete_todo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">todo_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">todos</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">todos</span> <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">id</span> <span class="o">!=</span> <span class="n">todo_id</span><span class="p">]</span>
+</code></pre></div>
+<h3 id="step-3-create-a-controller">Step 3: Create a Controller<a class="headerlink" href="#step-3-create-a-controller" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># app/controllers/todo_controller.py</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fletx.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">FletXController</span><span class="p">,</span> <span class="n">RxList</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">app.services.todo_service</span><span class="w"> </span><span class="kn">import</span> <span class="n">TodoService</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TodoController</span><span class="p">(</span><span class="n">FletXController</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">todos</span> <span class="o">=</span> <span class="n">RxList</span><span class="p">([])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">service</span> <span class="o">=</span> <span class="n">TodoService</span><span class="p">()</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_todo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">service</span><span class="o">.</span><span class="n">add_todo</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update_todos_list</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">toggle_todo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">todo_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">service</span><span class="o">.</span><span class="n">toggle_todo</span><span class="p">(</span><span class="n">todo_id</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update_todos_list</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">delete_todo</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">todo_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">service</span><span class="o">.</span><span class="n">delete_todo</span><span class="p">(</span><span class="n">todo_id</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update_todos_list</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">update_todos_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">todos</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">service</span><span class="o">.</span><span class="n">get_todos</span><span class="p">()</span>
+</code></pre></div>
+<h3 id="step-4-create-a-page">Step 4: Create a Page<a class="headerlink" href="#step-4-create-a-page" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># app/pages/todo_page.py</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">flet</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ft</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fletx.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">FletXPage</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fletx.decorators</span><span class="w"> </span><span class="kn">import</span> <span class="n">obx</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">app.controllers.todo_controller</span><span class="w"> </span><span class="kn">import</span> <span class="n">TodoController</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TodoPage</span><span class="p">(</span><span class="n">FletXPage</span><span class="p">):</span>
+    <span class="n">ctrl</span> <span class="o">=</span> <span class="n">TodoController</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">build</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">input_field</span> <span class="o">=</span> <span class="n">ft</span><span class="o">.</span><span class="n">TextField</span><span class="p">(</span>
+            <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Add a todo&quot;</span><span class="p">,</span>
+            <span class="n">width</span><span class="o">=</span><span class="mi">300</span>
+        <span class="p">)</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">add_todo</span><span class="p">(</span><span class="n">_</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">input_field</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">strip</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">ctrl</span><span class="o">.</span><span class="n">add_todo</span><span class="p">(</span><span class="n">input_field</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+                <span class="n">input_field</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+
+        <span class="n">add_button</span> <span class="o">=</span> <span class="n">ft</span><span class="o">.</span><span class="n">ElevatedButton</span><span class="p">(</span><span class="s2">&quot;Add&quot;</span><span class="p">,</span> <span class="n">on_click</span><span class="o">=</span><span class="n">add_todo</span><span class="p">)</span>
+
+        <span class="nd">@obx</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">todo_list</span><span class="p">():</span>
+            <span class="k">return</span> <span class="n">ft</span><span class="o">.</span><span class="n">Column</span><span class="p">([</span>
+                <span class="n">ft</span><span class="o">.</span><span class="n">Checkbox</span><span class="p">(</span>
+                    <span class="n">label</span><span class="o">=</span><span class="n">todo</span><span class="o">.</span><span class="n">title</span><span class="p">,</span>
+                    <span class="n">value</span><span class="o">=</span><span class="n">todo</span><span class="o">.</span><span class="n">completed</span><span class="p">,</span>
+                    <span class="n">on_change</span><span class="o">=</span><span class="k">lambda</span> <span class="n">_</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">ctrl</span><span class="o">.</span><span class="n">toggle_todo</span><span class="p">(</span><span class="n">todo</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+                <span class="p">)</span>
+                <span class="k">for</span> <span class="n">todo</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ctrl</span><span class="o">.</span><span class="n">todos</span>
+            <span class="p">])</span>
+
+        <span class="k">return</span> <span class="n">ft</span><span class="o">.</span><span class="n">Column</span><span class="p">([</span>
+            <span class="n">ft</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="s2">&quot;My Todos&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="s2">&quot;bold&quot;</span><span class="p">),</span>
+            <span class="n">ft</span><span class="o">.</span><span class="n">Row</span><span class="p">([</span><span class="n">input_field</span><span class="p">,</span> <span class="n">add_button</span><span class="p">]),</span>
+            <span class="n">todo_list</span><span class="p">()</span>
+        <span class="p">])</span>
+</code></pre></div>
+<h3 id="step-5-register-the-route">Step 5: Register the Route<a class="headerlink" href="#step-5-register-the-route" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># app/routes.py</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fletx.navigation</span><span class="w"> </span><span class="kn">import</span> <span class="n">router_config</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">app.pages.todo_page</span><span class="w"> </span><span class="kn">import</span> <span class="n">TodoPage</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">setup_routes</span><span class="p">():</span>
+    <span class="n">router_config</span><span class="o">.</span><span class="n">add_route</span><span class="p">(</span>
+        <span class="n">path</span><span class="o">=</span><span class="s2">&quot;/&quot;</span><span class="p">,</span>
+        <span class="n">component</span><span class="o">=</span><span class="n">TodoPage</span>
+    <span class="p">)</span>
+</code></pre></div>
+<h3 id="step-6-run-the-app">Step 6: Run the App<a class="headerlink" href="#step-6-run-the-app" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># main.py</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">fletx</span><span class="w"> </span><span class="kn">import</span> <span class="n">FletXApp</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">app.routes</span><span class="w"> </span><span class="kn">import</span> <span class="n">setup_routes</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">setup_routes</span><span class="p">()</span>
+
+    <span class="n">app</span> <span class="o">=</span> <span class="n">FletXApp</span><span class="p">(</span>
+        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;My Todo App&quot;</span><span class="p">,</span>
+        <span class="n">initial_route</span><span class="o">=</span><span class="s2">&quot;/&quot;</span>
+    <span class="p">)</span>
+    <span class="n">app</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</code></pre></div>
+<hr />
+<h2 id="using-the-fletx-cli">Using the FletX CLI<a class="headerlink" href="#using-the-fletx-cli" title="Permanent link">&para;</a></h2>
+<p>The CLI helps you generate code and manage your project:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Create a new project</span>
+fletx<span class="w"> </span>new<span class="w"> </span>my_app<span class="w"> </span>--author<span class="w"> </span><span class="s2">&quot;Your Name&quot;</span><span class="w"> </span>--description<span class="w"> </span><span class="s2">&quot;My awesome app&quot;</span>
+
+<span class="c1"># Generate a new page</span>
+fletx<span class="w"> </span>generate<span class="w"> </span>page<span class="w"> </span>products_page
+
+<span class="c1"># Generate a new controller</span>
+fletx<span class="w"> </span>generate<span class="w"> </span>controller<span class="w"> </span>products_controller<span class="w"> </span>--with-test
+
+<span class="c1"># Run with hot reload (in development)</span>
+fletx<span class="w"> </span>run<span class="w"> </span>--debug
+
+<span class="c1"># Build for web</span>
+fletx<span class="w"> </span>run<span class="w"> </span>--web
+
+<span class="c1"># Run tests</span>
+fletx<span class="w"> </span><span class="nb">test</span>
+</code></pre></div>
+<hr />
+<h2 id="next-steps">Next Steps<a class="headerlink" href="#next-steps" title="Permanent link">&para;</a></h2>
+<p>Now that you have FletX installed and your first app running:</p>
+<ol>
+<li><strong>Learn about <a href="../routing/">Routing</a></strong> - Navigate between pages</li>
+<li><strong>Understand <a href="../dependency-injection/">Dependency Injection</a></strong> - Share services across your app</li>
+<li><strong>Explore <a href="../controllers/">State Management with Controllers</a></strong> - Manage app state reactively</li>
+<li><strong>Check <a href="../services/">Services</a></strong> - Organize business logic</li>
+<li><strong>Read <a href="../architecture/">Architecture</a></strong> - See the big picture</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        
+<div class="md-social">
+  
+    
+    
+    
+    
+    <a href="https://github.com/AllDotPy/FletX" target="_blank" rel="noopener" title="FletX on GitHub" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+    </a>
+  
+    
+    
+    
+    
+    <a href="https://twitter.com/FletX_dev" target="_blank" rel="noopener" title="FletX on X" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M459.4 151.7c.3 4.5.3 9.1.3 13.6 0 138.7-105.6 298.6-298.6 298.6-59.5 0-114.7-17.2-161.1-47.1 8.4 1 16.6 1.3 25.3 1.3 49.1 0 94.2-16.6 130.3-44.8-46.1-1-84.8-31.2-98.1-72.8 6.5 1 13 1.6 19.8 1.6 9.4 0 18.8-1.3 27.6-3.6-48.1-9.7-84.1-52-84.1-103v-1.3c14 7.8 30.2 12.7 47.4 13.3-28.3-18.8-46.8-51-46.8-87.4 0-19.5 5.2-37.4 14.3-53C87.4 130.8 165 172.4 252.1 176.9c-1.6-7.8-2.6-15.9-2.6-24C249.5 95.1 296.3 48 354.4 48c30.2 0 57.5 12.7 76.7 33.1 23.7-4.5 46.5-13.3 66.6-25.3-7.8 24.4-24.4 44.8-46.1 57.8 21.1-2.3 41.6-8.1 60.4-16.2-14.3 20.8-32.2 39.3-52.6 54.3"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.instant", "navigation.instant.prefetch", "navigation.path", "navigation.indexes", "navigation.top", "navigation.tabs", "navigation.sections", "navigation.tracking", "navigation.prune", "toc.follow", "search.suggest", "search.highlight", "code.copy", "code.annotate", "code.tabs", "code.expand", "content.code.copy", "content.code.select", "content.action.edit", "content.action.view"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": "0.1.4.dev1"}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../assets/javascript/msdl.v1.js"></script>
+      
+        <script src="../../assets/javascript/init_kapa_widget.v2.js"></script>
+      
+    
+  </body>
+</html>

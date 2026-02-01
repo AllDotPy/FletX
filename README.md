@@ -29,7 +29,15 @@
 <!-- [![GitHub commit activity](https://img.shields.io/github/commit-activity/m/AllDotPy/FletX)]() -->
 
 # FletX 🚀  
-**The open-source GetX-inspired Python Framework for Building Reactive, Cross-Platform Apps with Flet** | _leave star if you like it 🌟_
+**The open-source GetX-inspired Python Framework for Building Reactive, Cross-Platform Apps with Flet** 
+
+>### 🌟 Support FletX 
+>**12,5k+ downloads** • **70 stars**.
+>
+>If FletX has been useful in your work, starring the repo:
+>- Helps priioritize features you care about.
+>- Signnals quality to nnew users.
+>- Keeps us mootivated to maintain it.
 
 ## Why FletX? ✨
 

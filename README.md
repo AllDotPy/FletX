@@ -31,13 +31,7 @@
 # FletX 🚀  
 **The open-source GetX-inspired Python Framework for Building Reactive, Cross-Platform Apps with Flet** 
 
->### 🌟 Support FletX 
->**12,5k+ downloads** • **70 stars**.
->
->If FletX has been useful in your work, starring the repo:
->- Helps priioritize features you care about.
->- Signnals quality to nnew users.
->- Keeps us mootivated to maintain it.
+> _Leave a star if you like it 🌟_
 
 ## Why FletX? ✨
 
@@ -373,6 +367,14 @@ We welcome contributions from the community! Please see the [CONTRIBUTING.md](CO
 MIT © 2025 AllDotPy
 
 ## Star History 🌟
+>### 🌟 Support FletX 
+>**12,5k+ downloads** • **70 stars**.
+>
+>If FletX has been useful in your work, starring the repo:
+>- Helps priioritize features you care about.
+>- Signnals quality to nnew users.
+>- Keeps us mootivated to maintain it.
+
 [![star History Chart](https://api.star-history.com/svg?repos=AllDotPy/FletX&type=Date)](https://api.star-history.com/svg?repos=AllDotPy/FletX&type=Date)
 
 ```bash

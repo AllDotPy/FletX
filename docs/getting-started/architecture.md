@@ -1,6 +1,6 @@
 # Architecture
 
-**TL;DR** — FletX apps separate concerns into Pages (UI), Controllers (logic + state), and Services (reusable utilities). Data flows in one direction: user action → controller → state update → UI re-render.
+>**TL;DR** — FletX apps separate concerns into Pages (UI), Controllers (logic + state), and Services (reusable utilities). Data flows in one direction: user action → controller → state update → UI re-render.
 
 ## Problem
 

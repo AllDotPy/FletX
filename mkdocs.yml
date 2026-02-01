@@ -73,7 +73,7 @@ nav:
       - FletX CLI: getting-started/fletx-cli.md
       - Architecture: getting-started/architecture.md
       - State Management: getting-started/state-management.md
-      # - Reactive Decorators: getting-started/decorators.md
+      - Reactive Decorators: getting-started/decorators.md
       - Controllers: getting-started/controllers.md
       - Pages (views): getting-started/pages.md
       - Routing System: getting-started/routing.md

@@ -371,9 +371,9 @@ MIT © 2025 AllDotPy
 >**12,5k+ downloads** • **70 stars**.
 >
 >If FletX has been useful in your work, starring the repo:
->- Helps priioritize features you care about.
->- Signnals quality to nnew users.
->- Keeps us mootivated to maintain it.
+>- Helps prioritize features you care about.
+>- Signals quality to new users.
+>- Keeps us motivated to maintain it.
 
 [![star History Chart](https://api.star-history.com/svg?repos=AllDotPy/FletX&type=Date)](https://api.star-history.com/svg?repos=AllDotPy/FletX&type=Date)
 

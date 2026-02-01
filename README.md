@@ -367,8 +367,8 @@ We welcome contributions from the community! Please see the [CONTRIBUTING.md](CO
 MIT © 2025 AllDotPy
 
 ## Star History 🌟
->### 🌟 Support FletX 
->**12,5k+ downloads** • **70 stars**.
+>### Support FletX 
+>**12,5k+ downloads** • **~150 clones per day** • **but 70 stars** •.
 >
 >If FletX has been useful in your work, starring the repo:
 >- Helps prioritize features you care about.

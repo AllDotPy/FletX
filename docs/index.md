@@ -1,6 +1,6 @@
 
 <p align="center">
-    <img src="assets/logo/fletx_t.png" height="100" style="height:150px;">
+    <img src="assets/logo/fletx_t.png" height="140" alt="FletX logo">
 </p>
 
 <p align="center">
@@ -13,103 +13,85 @@
     <a href="LICENSE">
         <img src="https://img.shields.io/badge/license-MIT-blue" alt="License" />
     </a>
-    <a href="https://discord.gg/GRez7BTZVy">
-        <img src="https://img.shields.io/discord/1381155066232176670" alt="Discord" />
-    </a>
     <a href="https://github.com/AllDotPy/FletX">
         <img src="https://img.shields.io/github/commit-activity/m/AllDotPy/FletX" alt="GitHub commit activity" />
     </a>
 </p>
 
-# ✨ Welcome to FletX
+# Welcome to FletX
 
-**FletX** is a lightweight, modular, and reactive architectural framework built on top of [Flet](https://flet.dev), designed to help you build scalable Python UI applications with clean code, structured layers, and modern development patterns.
-
----
-
-## :material-head-question-outline: What is FletX?
-
-Inspired by frameworks like **GetX** in the Flutter ecosystem, **FletX** introduces powerful architectural patterns to Flet:
-
-- ✅ **Reactive state management**
-- ✅ **Modular routing system** with dynamic parameters and guards
-- ✅ **Controllers and services** to separate logic from UI
-- ✅ **Global and local dependency injection**
-- ✅ **Lifecycle hooks** for pages and the app
-- ✅ **Unified configuration with fluent API**
-- ✅ **Built-in support for asynchronous programming**
+FletX is a lightweight, modular, and reactive architectural layer built on top of [Flet](https://flet.dev). It helps you structure Python UI apps using clear separation of concerns (Pages → Controllers → Services), predictable lifecycle hooks, and a small set of reactive primitives.
 
 ---
 
-## 🧠 Philosophy
+**Quick orientation**
 
-FletX is built on 3 core principles:
-
-1. **Simplicity** — Focus on code clarity and maintainability  
-2. **Modularity** — Encourage component-based structure and reusable logic  
-3. **Flexibility** — Allow full control over your app flow, while staying non-intrusive  
-
-> FletX is not a UI library. It doesn’t reinvent Flet’s widgets — it empowers you to use them better by providing a powerful and extensible application layer.
+- Use `Pages` to describe UI and navigation.
+- Use `Controllers` for state and business logic.
+- Use `Services` for reusable integrations (APIs, storage).
+- Use the CLI to scaffold and run projects quickly.
 
 ---
 
-## ⚡ Quick Example
+## What is FletX? (short)
+
+FletX brings architecture patterns familiar from mobile/web frameworks (for example, GetX) to Flet applications: reactive state management, modular routing, dependency injection, and lifecycle hooks — without replacing Flet widgets.
+
+Key features:
+
+- Reactive state primitives (`Rx*`, `Computed`, `Observer`) for straightforward UI updates.
+- A routing system with guards and nested routes.
+- Controllers and Services to separate UI from logic.
+- A small set of decorators and helpers for effects, memoization, and batched updates.
+- A CLI for scaffolding, generation, running, and testing.
+
+---
+
+## TL;DR — Get started in three commands
+
+```bash
+fletx new my_app             # scaffold a project
+cd my_app
+fletx run --web --watch      # run with hot reload
+```
+
+---
+
+## Simple Example (counter)
+
+This minimal example shows how a `Page` and a `Controller` work together:
 
 ```python
 import flet as ft
-
 from fletx.app import FletXApp
-from fletx.core import (
-    FletXPage, FletXController, RxInt, RxStr
-)
-from fletx.navigation import router_config
+from fletx.core import FletXPage, FletXController, RxInt
 from fletx.decorators import obx
 
 
 class CounterController(FletXController):
-
     def __init__(self):
-        count = RxInt(0)  # Reactive state
-        super().__init__()
+        self.count = RxInt(0)
+
+    def increment(self):
+        self.count.increment()
 
 
 class CounterPage(FletXPage):
     ctrl = CounterController()
 
     @obx
-    def counter_text(self):
-        return ft.Text(
-            value=f'Count: {self.ctrl.count}',
-            size=50,
-            weight="bold",
-            color='red' if not self.ctrl.count.value % 2 == 0 else 'white'
-        )
+    def counter_label(self):
+        return ft.Text(f"Count: {self.ctrl.count}")
 
     def build(self):
-        return ft.Column(
-            controls=[
-                self.counter_text(),
-                ft.ElevatedButton(
-                    "Increment",
-                    on_click=lambda e: self.ctrl.count.increment()
-                )
-            ]
-        )
+        return ft.Column(controls=[
+            self.counter_label(),
+            ft.ElevatedButton("+", on_click=lambda e: self.ctrl.increment())
+        ])
 
 
 def main():
-    router_config.add_route(
-        path='/',
-        component=CounterPage
-    )
-    app = FletXApp(
-        title="My Counter",
-        initial_route="/",
-        debug=True
-    ).with_window_size(400, 600).with_theme(
-        ft.Theme(color_scheme_seed=ft.Colors.BLUE)
-    )
-
+    app = FletXApp(title="Counter", initial_route="/", debug=True)
     app.run()
 
 
@@ -119,53 +101,32 @@ if __name__ == "__main__":
 
 ---
 
-## 🚀 Explore FletX
+## Learn Path — Start here
 
-<div class="grid cards" markdown>
-
--   :material-power:{ .lg .middle } **Get Started**
-
-    ---
-
-    Set up **FletX** and build your first UI in minutes.
-
-    [→ Installation Guide](getting-started/installation.md)
-
--   :material-api:{ .lg .middle } **API Reference**
-
-    ---
-
-    Complete reference for all available methods and configurations.
-
-    [→ API Documentation](api-reference.md)
-
--   :material-rocket-launch:{ .lg .middle } **Guides**
-
-    ---
-
-    Learn routing, state, and architecture with hands-on guides.
-
-    [→ Routing Guide](getting-started/routing.md) | [→ State Management](getting-started/state-management.md)
-
--   :material-github:{ .lg .middle } **Contribute**
-
-    ---
-
-    Help improve FletX with your feedback and code.
-
-    [→ Contribution Guide](contributing.md)
-
-</div>
+- **Installation**: getting-started/installation.md — Set up your environment and the CLI.
+- **Routing**: getting-started/routing.md — Learn navigation, guards, and route parameters.
+- **State**: getting-started/state-management.md — Reactive primitives and patterns.
+- **Controllers**: getting-started/controllers.md — Where business logic lives.
+- **Pages**: getting-started/pages.md — Page lifecycle and composition.
+- **Services**: getting-started/services.md — External integrations and utilities.
+- **Decorators**: getting-started/decorators.md — Effects, memoization, and more.
 
 ---
 
-## 📌 Additional Links
+## Tools & Resources
 
-* [GitHub Repository](https://github.com/AllDotPy/FletX)
-* [PyPI Package](https://pypi.org/project/FletXr/)
-* [Join the Community on Discord](https://discord.gg/GRez7BTZVy)
-* [License](LICENSE)
+- **CLI**: `fletx` — scaffold, generate, run, and test projects. See getting-started/fletx-cli.md for usage.
+- **API Reference**: api-reference.md — exhaustive list of classes and helpers.
+- **Examples**: examples/template — a starter project you can run and adapt.
 
 ---
 
-Made with ❤️ by [AllDotPy](https://alldotpy.com)
+## Community & Contributing
+
+- GitHub: https://github.com/AllDotPy/FletX
+- Discord: https://discord.gg/GRez7BTZVy
+- To contribute: read CONTRIBUTING.md and open a PR.
+
+---
+
+Made with ❤️ by AllDotPy

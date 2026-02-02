@@ -39,7 +39,7 @@ class ControllerState(Enum):
 
 
 ####
-##      
+##      CONTROLLER EVENT
 #####
 class ControllerEvent:
     """Represents a fletx contoller event"""

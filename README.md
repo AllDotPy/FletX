@@ -60,7 +60,7 @@ See FletX in action across different platforms:
         </td>
         <td rowspan="2". width="350">
             <strong>Mobile</strong><br/>
-            <img src="./screeshots/videos/mobile.gif" width="350" alt="Mobile Demo">
+            <img src="./screeshots/videos/mobile.gif" width="300" alt="Mobile Demo">
         </td>
     </tr>
     <tr align="center">

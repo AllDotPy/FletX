@@ -52,6 +52,9 @@ theme:
     text: Inter
     code: Chivo Mono
 
+  # CODE STYLES
+  hljs_style: monokai
+
 # Extra JS files
 extra_javascript:
   - assets/javascript/msdl.v1.js
@@ -96,7 +99,15 @@ markdown_extensions:
   - tables
   - toc:
       permalink: true
-  - pymdownx.highlight
+  - pymdownx.highlight:
+      linenums: true
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+      use_pygments: true
+      auto_title: true
+      noclasses: true
+      pygments_style: one-dark
   - pymdownx.superfences
   - pymdownx.details
   - pymdownx.tabbed

@@ -54,7 +54,7 @@ See FletX in action across different platforms:
 
 <table>
     <tr>
-        <td width="400">
+        <td align="center" width="400">
             <strong>Web</strong><br/>
             <img src="./screeshots/videos/web.gif" width="350" alt="Web Demo">
         </td>
@@ -63,7 +63,7 @@ See FletX in action across different platforms:
             <img src="./screeshots/videos/mobile.gif" width="350" alt="Mobile Demo">
         </td>
     </tr>
-    <tr>
+    <tr align="center">
         <td width="400">
         <strong>Desktop</strong><br/>
         <img src="./screeshots/videos/desktop.gif" width="350" alt="Desktop Demo">

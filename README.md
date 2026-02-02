@@ -54,17 +54,17 @@ See FletX in action across different platforms:
 
 <table>
     <tr>
-        <td>
+        <td width="400">
             <strong>Web</strong><br/>
             <img src="./screeshots/videos/web.gif" width="350" alt="Web Demo">
         </td>
-        <td rowspan="2">
+        <td rowspan="2". width="350">
             <strong>Mobile</strong><br/>
             <img src="./screeshots/videos/mobile.gif" width="350" alt="Mobile Demo">
         </td>
     </tr>
     <tr>
-        <td>
+        <td width="400">
         <strong>Desktop</strong><br/>
         <img src="./screeshots/videos/desktop.gif" width="350" alt="Desktop Demo">
         </td>
@@ -265,7 +265,6 @@ FletX users report:
 ✅ **Reactive primitives** — `RxInt`, `RxStr`, `RxList`, `RxDict`, `Computed`  
 ✅ **Smart decorators** — `@obx`, `@reactive_debounce`, `@reactive_memo`, and 10+ more  
 ✅ **Built-in DI** — Global service container with tag-based lookup  
-✅ **Hot reload** — Change code, see results instantly  
 ✅ **Testing support** — Built-in utilities for unit & integration tests  
 ✅ **TypeScript-grade IDE support** — Full autocomplete and type hints  
 ✅ **Active maintenance** — Bug fixes, features, and community updates  
@@ -305,17 +304,6 @@ fletx check --json                         # Verify compatibility
 
 ---
 
-## 💪 Production-Ready
-
-FletX powers real apps:
-
-- **Mobile apps** deployed to Google Play & App Store
-- **Desktop tools** used by teams for daily workflow
-- **Web dashboards** with 10k+ monthly active users
-- **Enterprise integrations** with complex routing and state
-
----
-
 ## 🤝 Join the Community
 
 We're building FletX together. Here's how you can help:
@@ -350,7 +338,7 @@ We're building FletX together. Here's how you can help:
 
 ## 📄 License & Attribution
 
-MIT © 2025 AllDotPy
+MIT © 2026 AllDotPy
 
 <br/>
 

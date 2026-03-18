@@ -31,7 +31,6 @@ class RunCommand(BaseCommand):
             help = "Python file to run (default: main.py)"
         )
         parser.add_argument(
-            "-h",
             "--host",
             default = "localhost",
             help = "Host to bind to (default: localhost)"

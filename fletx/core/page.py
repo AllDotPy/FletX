@@ -5,6 +5,7 @@ A page that incorporates advanced features such as controller, effects, and reac
 enabling the creation of interactive and dynamic user experiences.
 """
 
+import inspect
 import flet as ft
 from typing import (
     Union, List, Optional, Any, Dict, Type, TypeVar, Callable
@@ -48,6 +49,18 @@ class FletXPage(ft.Container, ABC):
     for building robust and interactive pages.
     """
     
+    NAVIGATION_COMPONENT_KEYS = {
+        'app_bar',
+        'bottom_app_bar',
+        'drawer',
+        'end_drawer',
+        'navigation_bar',
+        'floating_action_button',
+        'floating_action_button_location'
+    }
+    __navigation_config__: Dict[str, Any] = {}
+    _MISSING_NAV = object()
+
     def __init__(
         self,
         *,
@@ -87,6 +100,11 @@ class FletXPage(ft.Container, ABC):
         # Reactive properties
         self._reactive_subscriptions: List[Any] = []
         self._child_pages: weakref.WeakSet = weakref.WeakSet()
+
+        # Navigation configuration sources
+        self._class_navigation_config = self._collect_class_navigation_config()
+        self._route_navigation_config: Dict[str, Any] = {}
+        self._instance_navigation_config: Dict[str, Any] = {}
         
         # Configuration
         self._enable_keyboard_shortcuts = enable_keyboard_shortcuts
@@ -110,6 +128,108 @@ class FletXPage(ft.Container, ABC):
             **kwargs
         )
     
+    # Navigation configuration utilities
+    @classmethod
+    def _collect_class_navigation_config(cls) -> Dict[str, Any]:
+        """Merge navigation config from the class hierarchy."""
+
+        config: Dict[str, Any] = {}
+        for base in reversed(cls.__mro__):
+            base_config = getattr(base, '__navigation_config__', None)
+            if base_config:
+                config.update({
+                    key: value
+                    for key, value in base_config.items()
+                    if key in cls.NAVIGATION_COMPONENT_KEYS
+                })
+        return config
+
+    @classmethod
+    def _filter_navigation_config(cls, config: Dict[str, Any]) -> Dict[str, Any]:
+        """Return only supported navigation keys from a config dict."""
+
+        if not config:
+            return {}
+        return {
+            key: value
+            for key, value in config.items()
+            if key in cls.NAVIGATION_COMPONENT_KEYS
+        }
+
+    def configure_navigation(self, **components) -> None:
+        """Set per-instance navigation overrides."""
+
+        filtered = self._filter_navigation_config(components)
+        if not filtered:
+            return
+        self._instance_navigation_config.update(filtered)
+        if self.is_mounted:
+            self.build_navigation_widgets()
+            self.refresh()
+
+    def set_route_navigation_config(self, config: Dict[str, Any]) -> None:
+        """Store navigation config provided by the router."""
+
+        self._route_navigation_config = self._filter_navigation_config(config)
+
+    def _evaluate_navigation_value(self, key: str, value: Any):
+        """Resolve navigation config entries into concrete controls."""
+
+        if value is None:
+            return None
+
+        try:
+            if inspect.isclass(value):
+                return value()
+
+            if callable(value):
+                call_patterns = (
+                    (self, self.route_info),
+                    (self,),
+                    (self.route_info,),
+                    tuple(),
+                )
+                for args in call_patterns:
+                    try:
+                        return value(*args)
+                    except TypeError:
+                        continue
+                self.logger.error(
+                    f"Navigation component '{key}' callable has unsupported signature"
+                )
+                return None
+
+            return value
+
+        except Exception as ex:
+            self.logger.error(
+                f"Failed to evaluate navigation component '{key}': {ex}",
+                exc_info=True
+            )
+            return None
+
+    def _resolve_navigation_component(
+        self,
+        key: str,
+        builder: Callable[[], Any]
+    ):
+        """Determine the navigation component using override precedence."""
+
+        sources = (
+            self._instance_navigation_config,
+            self._route_navigation_config,
+            self._class_navigation_config
+        )
+
+        for source in sources:
+            value = source.get(key, self._MISSING_NAV)
+            if value is not self._MISSING_NAV:
+                return self._evaluate_navigation_value(key, value)
+
+        if builder:
+            return builder()
+        return None
+
     @property
     def logger(self):
         """Logger instance for this page"""
@@ -241,26 +361,32 @@ class FletXPage(ft.Container, ABC):
     def build_navigation_widgets(self):
         """Build all needed Navigation widgets."""
 
-        # AppBar
-        self.view.appbar = self.build_app_bar()
+        view = self.view
+        if not view:
+            return
 
-        # Bottom AppBar
-        self.view.bottom_appbar = self.build_bottom_app_bar()
-
-        # Nav Drawer
-        self.view.drawer = self.build_drawer()
-
-        # Navigation Bar
-        self.view.navigation_bar = self.build_navigation_bar()
-
-        # Floating Action Button
-        self.view.floating_action_button = self.build_floating_action_button()
-
-        # Floating Action Button Location
-        self.view.floating_action_button_location = self.build_floating_action_button_location()
-
-        # End Drawer
-        self.view.end_drawer = self.build_end_drawer()
+        view.appbar = self._resolve_navigation_component(
+            'app_bar', self.build_app_bar
+        )
+        view.bottom_appbar = self._resolve_navigation_component(
+            'bottom_app_bar', self.build_bottom_app_bar
+        )
+        view.drawer = self._resolve_navigation_component(
+            'drawer', self.build_drawer
+        )
+        view.navigation_bar = self._resolve_navigation_component(
+            'navigation_bar', self.build_navigation_bar
+        )
+        view.floating_action_button = self._resolve_navigation_component(
+            'floating_action_button', self.build_floating_action_button
+        )
+        view.floating_action_button_location = self._resolve_navigation_component(
+            'floating_action_button_location',
+            self.build_floating_action_button_location
+        )
+        view.end_drawer = self._resolve_navigation_component(
+            'end_drawer', self.build_end_drawer
+        )
     
     # Lifecycle methods
     def before_on_init(self):

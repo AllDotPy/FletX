@@ -144,28 +144,28 @@ class EventBus:
                             f"Error when executing {callback.__name__} callback: {e}"
                         )
 
-            # Execute Once listeners and then remove them
-            if event.type in self._once_listeners:
-                listeners = self._once_listeners[event.type].copy()
+                # Execute Once listeners and then remove them
+        if event.type in self._once_listeners:
+            listeners = self._once_listeners[event.type].copy()
 
-                # Clear event type listeners
-                self._once_listeners[event.type].clear()
+            # Clear event type listeners
+            self._once_listeners[event.type].clear()
 
-                # Then Execute each callback
-                for callback in listeners:
-                    try:
-                        # Coroutine callback
-                        if asyncio.iscoroutinefunction(callback):
-                            get_event_loop().create_task(callback(event))
+            # Then Execute each callback
+            for callback in listeners:
+                try:
+                    # Coroutine callback
+                    if asyncio.iscoroutinefunction(callback):
+                        get_event_loop().create_task(callback(event))
 
-                        # Non coroutine callback
-                        else:
-                            callback(event)
+                    # Non coroutine callback
+                    else:
+                        callback(event)
 
-                    except Exception as e:
-                        self.logger.error(
-                            f"Error when executing {callback.__name__} callback: {e}"
-                        )
+                except Exception as e:
+                    self.logger.error(
+                        f"Error when executing {callback.__name__} callback: {e}"
+                    )
 
     def listen_reactive(self, event_type: str) -> Computed[List[ControllerEvent]]:
         """Return a computed property that filters events by type"""

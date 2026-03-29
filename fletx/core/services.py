@@ -81,25 +81,25 @@ class FletXService(ABC):
     def state(self) -> ServiceState:
         """Current state of the service"""
 
-        return self._state
+        return self._state.value
 
     @property
     def is_ready(self) -> bool:
         """Check if service is ready"""
 
-        return self._state == ServiceState.READY
+        return self._state.value == ServiceState.READY
 
     @property
     def is_loading(self) -> bool:
         """check if service is loading"""
 
-        return self._state == ServiceState.LOADING
+        return self._state.value == ServiceState.LOADING
 
     @property
     def has_error(self) -> bool:
         """check if service has an error"""
 
-        return self._state == ServiceState.ERROR
+        return self._state.value == ServiceState.ERROR
 
     @property
     def error(self) -> Optional[Exception]:
@@ -162,7 +162,7 @@ class FletXService(ABC):
         if self._disposed:
             raise RuntimeError(f"Cannot start disposed service {self._name}")
 
-        if self._state != ServiceState.IDLE:
+        if self._state.value != ServiceState.IDLE:
             self._logger.warning(
                 f"Service already started (current state: {self._state.value})"
             )
@@ -188,7 +188,7 @@ class FletXService(ABC):
         if self._disposed:
             raise RuntimeError(f"Cannot start disposed service {self._name}")
 
-        if self._state != ServiceState.IDLE:
+        if self._state.value != ServiceState.IDLE:
             self._logger.warning(
                 f"Service already started (current state: {self._state.value})"
             )
@@ -225,7 +225,7 @@ class FletXService(ABC):
     def stop(self):
         """Stop the service"""
 
-        if self._state == ServiceState.IDLE:
+        if self._state.value == ServiceState.IDLE:
             return
 
         try:
@@ -244,7 +244,7 @@ class FletXService(ABC):
     async def stop_async(self):
         """Async version of stop method"""
 
-        if self._state == ServiceState.IDLE:
+        if self._state.value == ServiceState.IDLE:
             return
 
         try:

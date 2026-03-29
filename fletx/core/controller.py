@@ -159,10 +159,10 @@ class EventBus:
             # Then Execute each callback
             for callback in listeners:
 
-                try:
-                    # Coroutine callback
-                    if asyncio.iscoroutinefunction(callback):
-                        get_event_loop.create_task(callback(event))
+                 try:
+                     # Coroutine callback
+                     if asyncio.iscoroutinefunction(callback):
+                         get_event_loop().create_task(callback(event))
 
                     # Non coroutine callback
                     else:
@@ -416,9 +416,9 @@ class FletXController:
     def ready(self):
         """Mark the controller as ready"""
 
-        if self._state != ControllerState.INITIALIZED:
+        if self._state.value != ControllerState.INITIALIZED:
             return self
-            
+
         self._effects.runEffects()
         self._state.value = ControllerState.READY
         return self

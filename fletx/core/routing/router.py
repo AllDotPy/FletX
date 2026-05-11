@@ -464,6 +464,19 @@ class FletXRouter:
             instance = component_class()
             if hasattr(instance, 'route_info'):
                 instance.route_info = route_info
+
+            # Apply navigation config from route metadata
+            navigation_config: Dict[str, Any] = {}
+            if route_def.meta:
+                if 'navigation' in route_def.meta and isinstance(route_def.meta['navigation'], dict):
+                    navigation_config.update(route_def.meta['navigation'])
+
+                for key in FletXPage.NAVIGATION_COMPONENT_KEYS:
+                    if key in route_def.meta:
+                        navigation_config[key] = route_def.meta[key]
+
+            if navigation_config:
+                instance.set_route_navigation_config(navigation_config)
             return instance
         
         elif callable(component_class):

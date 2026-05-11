@@ -2,6 +2,8 @@ import pytest
 from unittest.mock import Mock, MagicMock, patch, PropertyMock
 from fletx.core.page import FletXPage, PageState
 from fletx.core.controller import FletXController
+from fletx.core.routing.models import RouteInfo
+from fletx.decorators.page import page_config
 import flet as ft
 
 
@@ -11,6 +13,12 @@ class SamplePage(FletXPage):
     
     def build(self):
         return ft.Text("Test Page Content")
+
+
+@page_config(app_bar=lambda page: ft.AppBar(title=ft.Text("Decorated")))
+class DecoratedPage(SamplePage):
+    """Sample page with declarative navigation config for testing."""
+    pass
 
 
 class SampleController(FletXController):
@@ -177,3 +185,34 @@ def test_fletxpage_keyboard_shortcuts(mock_dependencies):
     removed = page.remove_keyboard_shortcut("ctrl+s")
     assert removed
     assert "ctrl+s" not in page._keyboard_shortcuts
+
+
+def test_page_config_applies_navigation(mock_dependencies):
+    """Ensure page_config decorator populates navigation components."""
+    page = DecoratedPage()
+    page.route_info = RouteInfo(path="/decorated")
+
+    page._build_page()
+
+    appbar = mock_dependencies['page'].views[-1].appbar
+    assert isinstance(appbar, ft.AppBar)
+    assert isinstance(appbar.title, ft.Text)
+    assert appbar.title.value == "Decorated"
+
+
+def test_route_navigation_overrides_class_config(mock_dependencies):
+    """Route-level config should override decorator defaults."""
+    page = DecoratedPage()
+    page.route_info = RouteInfo(path="/decorated")
+    page.set_route_navigation_config({
+        'app_bar': lambda page, info: ft.AppBar(
+            title=ft.Text(f"Route {info.path if info else ''}")
+        )
+    })
+
+    page._build_page()
+
+    appbar = mock_dependencies['page'].views[-1].appbar
+    assert isinstance(appbar, ft.AppBar)
+    assert appbar.title.value == "Route /decorated"
+

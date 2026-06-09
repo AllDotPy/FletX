@@ -1,0 +1,349 @@
+/* -------------------------------------------------------------------------------- */
+/* Modified from https://github.com/hummingbot/hummingbot-site - Apache-2.0 license */
+/* -------------------------------------------------------------------------------- */
+
+/*
+   ===============================
+    Font configuration
+   ===============================
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@600&display=swap');
+.md-header__topic:first-child {
+    font-weight: 700;
+}
+.md-typeset h1 {
+    font-weight: 700;
+    color: var(--md-typeset-a-color);
+}
+.md-typeset h2,
+.md-typeset h3,
+.md-typeset h4 {
+    font-weight: 600 !important
+}
+.accent a {
+    font-weight: 500;
+}
+
+
+/*
+   =================
+    Colour scheme
+   =================
+*/
+
+:root,
+[data-md-color-scheme="default"] {
+    --md-default-bg-color: hsl(0, 0%, 98%);
+    --md-primary-fg-color: hsl(0, 0%, 100%);
+    --md-primary-fg-color--light: hsl(209, 100%, 65%);
+    --md-primary-fg-color--dark: hsl(209, 100%, 35%);
+    --md-primary-bg-color: hsla(0, 2%, 12%, 0.75);
+    --md-primary-bg-color--light: hsla(0, 0%, 0%, 0.54);
+    --md-accent-fg-color: hsl(209, 100%, 35%);
+    --pg-light-border: hsl(220, 13%, 91%);
+    --hb-hero-color: hsl(0, 0%, 18%);
+}
+
+:root,
+[data-md-color-scheme="slate"] {
+    --md-default-bg-color: hsl(228, 11%, 9%);
+    --md-primary-fg-color: hsla(240, 10%, 4%, 0.5);
+    --md-primary-fg-color--light: hsl(209, 100%, 65%);
+    --md-primary-fg-color--dark: hsl(209, 100%, 80%);
+    --md-primary-bg-color: hsla(0, 0%, 0%, 0.75);
+    --md-primary-bg-color--light: hsla(0, 0%, 0%, 0.54);
+    --md-accent-fg-color: hsl(209, 100%, 80%);
+    --pg-light-border: hsl(0, 0%, 18%);
+    --hb-hero-color: hsl(209, 100%, 65%);
+}
+
+
+/*
+   ===============================
+    Gradient coming from header
+   ===============================
+*/
+
+[data-md-color-scheme="slate"] .header-gradient {
+    background: radial-gradient(70.81% 208.07% at 49.97% 160.07%, rgba(0, 78, 150, 0.18) 0%, rgba(2, 24, 45, 0) 100%);
+    z-index: -99;
+    width: 100%;
+    filter: blur(100px);
+    height: 30.5vh;
+    transform: rotate(180deg);
+    position: absolute;
+}
+
+/* Remove weird gradient that appears with gradient header
+   Not ideal as the section's label scrolls instead of being sticky */
+.md-nav--secondary .md-nav__title,
+.md-nav--lifted>.md-nav__list>.md-nav__item--active>.md-nav__link {
+    background: none !important;
+    box-shadow: none !important;
+    position: unset !important;
+}
+
+
+/*
+   ===============================
+    Customise cards - such as
+    on Home page
+   ===============================
+*/
+
+/* Remove box shadow & border */
+.md-typeset .grid.cards>ol>li:focus-within,
+.md-typeset .grid.cards>ol>li:hover,
+.md-typeset .grid.cards>ul>li:focus-within,
+.md-typeset .grid.cards>ul>li:hover,
+.md-typeset .grid>.card:focus-within,
+.md-typeset .grid>.card:hover {
+    box-shadow: none !important;
+    border-color: hsla(209, 100%, 65%, 0.5);
+}
+
+/* Make rounded */
+.md-typeset .grid.cards>ol>li,
+.md-typeset .grid.cards>ul>li,
+.md-typeset .grid>.card {
+    border-radius: 7px;
+}
+
+/* Change colour */
+.md-typeset .grid.cards>ul>li {
+    background-color: var(--md-primary-fg-color);
+}
+
+/* Hide shadow under navigation */
+.md-header[data-md-state="shadow"],
+.md-header--shadow {
+    box-shadow: none;
+}
+
+
+/*
+   ===============================
+    Blurred header
+   ===============================
+*/
+
+/* Unsupported blur fallback */
+.md-header,
+.md-tabs {
+    background-color: hsla(0, 0%, 100%, 0.95);
+}
+[data-md-color-scheme="slate"] .md-header,
+[data-md-color-scheme="slate"] .md-tabs {
+    background-color: hsla(0, 0%, 4%, 0.95);
+}
+
+/* Blurred header on devices which support it */
+@supports ((-webkit-backdrop-filter: none) or (backdrop-filter: none)) {
+
+    .md-header,
+    .md-tabs {
+        background-color: hsla(0, 0%, 100%, 0.6);
+        -webkit-backdrop-filter: blur(12px);
+        backdrop-filter: blur(12px);
+    }
+
+    [data-md-color-scheme="slate"] .md-header,
+    [data-md-color-scheme="slate"] .md-tabs {
+        background-color: hsla(240, 10%, 4%, 0.5);
+        -webkit-backdrop-filter: blur(12px);
+        backdrop-filter: blur(12px);
+    }
+}
+
+/* Fix mobile search with blurred header 
+   Causes a delay when opening search, not optimal */
+[data-md-scrolllock] .md-header,
+[data-md-scrolllock] .md-tabs {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+}
+
+/* Header border */
+header[class="md-header md-header--shadow"],
+nav[class="md-tabs"] {
+    border-bottom: 1px solid var(--pg-light-border);
+}
+
+/* Make light/dark mode button less bright */
+.md-header__button {
+    color: var(--md-default-fg-color--light);
+}
+
+/* White text */
+[data-md-color-scheme="slate"] .md-header>*,
+[data-md-color-scheme="slate"] .md-tabs {
+    color: hsl(0, 0%, 100%);
+}
+
+
+/*
+   ===============================
+    Customise mobile sidebar
+   ===============================
+*/
+
+[data-md-color-scheme="slate"] .md-nav--primary .md-nav__title[for="__drawer"] {
+    color: var(--md-typeset-a-color);
+}
+
+[data-md-color-scheme="slate"] .md-nav--primary .md-nav__title {
+    background-color: var(--md-primary-fg-color);
+}
+
+[data-md-color-scheme="default"] .md-nav--primary .md-nav__title {
+    background-color: var(--md-default-fg-color--lightest);
+}
+
+[data-md-color-scheme="default"] .md-nav__source {
+    background-color: var(--md-primary-fg-color--light);
+    color: white;
+}
+
+
+/*
+   ===============================
+    Customise search - make
+    it round and such
+   ===============================
+*/
+
+@media screen and (min-width: 60em) {
+    .md-search__overlay {
+        background-color: transparent;
+    }
+
+    .md-search__form {
+        border: 1px solid var(--pg-light-border);
+        background-color: var(--md-primary-fg-color) !important;
+        box-shadow: hsla(0, 0%, 0%, 0) 0px 0px 0px 0px, hsla(0, 0%, 0%, 0) 0px 0px 0px 0px, hsla(0, 0%, 0%, 0.02) 0px 1px 3px 0px, hsla(0, 0%, 0%, 0.02) 0px 1px 2px -1px;
+        border-radius: 6px;
+        height: 1.4rem;
+    }
+
+    [data-md-toggle="search"]:checked~.md-header .md-search__form {
+        border-radius: 6px 6px 0 0;
+    }
+
+    [dir="ltr"] .md-search__output {
+        top: initial;
+        border-radius: 0 0 6px 6px;
+    }
+
+    [data-md-toggle="search"]:checked~.md-header .md-search__output {
+        box-shadow: 0 0 .6rem hsla(0, 0%, 0%, 0.07);
+    }
+
+    .md-search__input {
+        font-size: .6rem;
+    }
+
+    @media screen and (min-width: 60em) {
+        .md-search__suggest {
+            font-size: .6rem;
+        }
+    }
+
+    .md-search__options {
+        top: .05rem;
+    }
+
+    .md-search__icon,
+    .md-search__input::placeholder {
+        color: var(--md-default-fg-color--light) !important;
+    }
+
+    .md-search__icon svg {
+        width: .75rem;
+        height: .75rem;
+    }
+}
+
+
+/*
+   ===============================
+    Customise footer
+   ===============================
+*/
+
+.md-footer {
+    margin-top: 1rem;
+    border-top: 1px solid var(--pg-light-border);
+}
+
+
+/*
+   ===============================
+    Customise buttons
+   ===============================
+*/
+
+.md-main .md-button--primary {
+    color: var(--md-primary-fg-color);
+    background-color: var(--hb-hero-color);
+    border-color: transparent;
+}
+
+.md-typeset .md-button:focus {
+    background: transparent;
+}
+
+
+/*
+   ===============================
+    Customise links
+   ===============================
+*/
+
+.accent {
+    color: var(--md-typeset-a-color);
+}
+
+/* Improve contrast on link colours */
+[data-md-color-scheme="default"]>* {
+    --md-typeset-a-color: hsl(209, 100%, 65%);
+}
+
+[data-md-color-scheme="slate"]>* {
+    --md-typeset-a-color: hsl(209, 100%, 65%);
+}
+
+
+/*
+   ===============================
+    Customise announcement bar
+   ===============================
+*/
+
+.md-banner {
+    background-color: var(--md-typeset-a-color);
+    color: var(--md-default-bg-color);
+    font-weight: 700;
+}
+
+
+/*
+   ===============================
+    Misc
+   ===============================
+*/
+
+/* Correct page icon size */
+.md-nav__link svg {
+    width: 22px;
+}
+
+.noJs {
+    display: none
+}
+
+.twemoji {
+    --md-icon-size: 1.225em !important;
+    height: var(--md-icon-size);
+    width: var(--md-icon-size);
+}
